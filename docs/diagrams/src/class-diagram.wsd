@@ -1,0 +1,42 @@
+@startuml class-diagram 
+
+class Scheduler {
+    - basePeriod: int 
+    - numOfTasks: int
+    - tasks: map<Task*, int>
+    - timer: Timer
+    - elapsedTime: int
+
+    - updateAndCheckTime(basePeriod: int): bool
+    + init(basePeriod: int)
+    + addTask(task:Task*): bool
+    + schedule()
+}
+
+class Timer {
+    + setupFreq(freq: int)
+    + setupPeriod(perido: int)
+    + waitForNextTick()
+}
+
+Scheduler *-left- Timer
+
+abstract class Task {
+    - myPeriod: int
+    + init(period: int)
+    + {abstract} tick()
+}
+
+Scheduler *-right- Task
+
+class MainTask 
+Task <|-- MainTask
+
+class DispensingTask
+Task <|-- DispensingTask
+
+class TestingTask
+Task <|-- TestingTask
+
+
+@enduml
