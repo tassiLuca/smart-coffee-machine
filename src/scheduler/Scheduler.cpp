@@ -1,4 +1,5 @@
 #include <iterator>
+#include <Arduino.h>
 
 #include "Scheduler.h"
 
@@ -6,7 +7,7 @@ Scheduler::Scheduler(const int basePeriod): basePeriod(basePeriod) {
     this->elapsedTime = 0;
 }
 
-bool Scheduler::addTask(Task* const task) {
+void Scheduler::addTask(Task* const task) {
     this->activeTasks.push_back(task);
 }
 
@@ -17,4 +18,5 @@ void Scheduler::schedule() {
             (*task)->tick();
         }
     }
+    delay(this->basePeriod);
 }

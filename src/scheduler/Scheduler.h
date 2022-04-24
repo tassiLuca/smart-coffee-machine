@@ -1,7 +1,7 @@
 #ifndef __SCHEDULER__
 #define __SCHEDULER__
 
-#include <StandardCplusplus.h>
+#include <ArduinoSTL.h>
 #include <list>
 #include "../tasks/Task.h"
 
@@ -14,7 +14,7 @@ private:
 
 public:
     Scheduler(const int basePeriod);
-    bool addTask(Task* const task);
+    void addTask(Task* const task);
     void schedule();
 
 };
