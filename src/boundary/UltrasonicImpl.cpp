@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include "UltrasonicImpl.h"
 
+// The speed of the sound wave at 20°C
+#define SOUND_SPEED 0.034
+
 UltrasonicImpl::UltrasonicImpl(const int triggerPin, const int echoPin)
     : triggerPin(triggerPin)
     , echoPin(echoPin) 
@@ -20,10 +23,7 @@ void UltrasonicImpl::generateImpulse()
 
 float UltrasonicImpl::getDistance() 
 {
-    static float soundSpeed = 331.45 + 0.62 * 20;   // 20°C
     this->generateImpulse();
-    float tUS = pulseIn(echoPin, HIGH);
-    float t = tUS / 1000.0 / 1000.0 / 2;
-    float d = t * soundSpeed;
-    return d;
+    float impulseDuration = pulseIn(echoPin, HIGH);
+    return impulseDuration * SOUND_SPEED / 2;
 }

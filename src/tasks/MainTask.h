@@ -6,7 +6,7 @@
 class MainTask: public Task {
 
 public:
-    MainTask(const int period) : Task(period) {};
+    MainTask(const int period);
     void tick();
 
 };

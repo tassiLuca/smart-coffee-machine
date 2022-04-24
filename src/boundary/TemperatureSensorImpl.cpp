@@ -1,15 +1,17 @@
 #include <Arduino.h>
 #include "TemperatureSensorImpl.h"
 
-#define VCC 5000
-#define MAX_INPUT_VALUE 1023
+// Power supply in mV
+#define POWER_SUPPLY 5000
+// The max value for analog read
+#define MAX_INPUT_VALUE 1024.0
 
 TemperatureSensorImpl::TemperatureSensorImpl(const int temperatureSensorPin)
     : pin(temperatureSensorPin)
 {}
 
-int TemperatureSensorImpl::getValue() 
+float TemperatureSensorImpl::getTemperature() 
 {
-    int mVValue = VCC / MAX_INPUT_VALUE * analogRead(pin);
+    float mVValue = analogRead(pin) * (POWER_SUPPLY / MAX_INPUT_VALUE);
     return mVValue * 0.1;
 }

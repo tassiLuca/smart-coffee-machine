@@ -4,14 +4,15 @@
 /**
  * @brief A virtual class representing the temperature sensor. 
  */
-class TemperatureSensor {
+class TemperatureSensor 
+{
 
 public:
     /**
      * @brief Reads and return the temperature value. 
-     * @return int a value between 0 and 1024.
+     * @return the tempetature, expressed in degree Celsius.
      */
-    virtual int getValue() = 0;
+    virtual float getTemperature() = 0;
 };
 
 #endif

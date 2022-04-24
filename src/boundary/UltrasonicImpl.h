@@ -3,7 +3,8 @@
 
 #include "Ultrasonic.h"
 
-class UltrasonicImpl: public Ultrasonic {
+class UltrasonicImpl: public Ultrasonic 
+{
 
 private:
     int triggerPin;

@@ -3,14 +3,15 @@
 
 #include "TemperatureSensor.h"
 
-class TemperatureSensorImpl: public TemperatureSensor {
+class TemperatureSensorImpl: public TemperatureSensor 
+{
 
 private:
     int pin;
 
 public:
     TemperatureSensorImpl(const int temperatureSensorPin);
-    int getValue();
+    float getTemperature();
 
 };
 
