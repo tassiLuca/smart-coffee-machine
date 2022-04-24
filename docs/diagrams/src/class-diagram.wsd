@@ -6,7 +6,6 @@ class Scheduler {
     - tasks: map<Task*, int>
     - timer: Timer
     - elapsedTime: int
-
     - updateAndCheckTime(basePeriod: int): bool
     + init(basePeriod: int)
     + addTask(task:Task*): bool
@@ -19,11 +18,13 @@ class Timer {
     + waitForNextTick()
 }
 
-Scheduler *-left- Timer
+Scheduler *-up- Timer
 
 abstract class Task {
     - myPeriod: int
+    - actualState: State*
     + init(period: int)
+    + changeState(nextState: State*)
     + {abstract} tick()
 }
 
@@ -35,8 +36,18 @@ Task <|-- MainTask
 class DispensingTask
 Task <|-- DispensingTask
 
-class TestingTask
-Task <|-- TestingTask
+class SelfTestingTask
+Task <|-- SelfTestingTask
+
+abstract class State {
+    - task: Task*
+    + setTask(task: Task*)
+    + getTask(): Task*
+    + {abstract} do()
+    + {abstract} nextState(): State
+}
+
+Task o-right- State
 
 
 @enduml
