@@ -2,17 +2,16 @@
 
 class Scheduler {
     - basePeriod: int 
-    - numOfTasks: int
-    - tasks: map<Task*, int>
+    - tasks: list<Task*>
     - timer: Timer
     - elapsedTime: int
-    - updateAndCheckTime(basePeriod: int): bool
-    + init(basePeriod: int)
+    + Scheduler(basePeriod: int)
     + addTask(task:Task*): bool
     + schedule()
 }
 
 class Timer {
+    + Timer()
     + setupFreq(freq: int)
     + setupPeriod(perido: int)
     + waitForNextTick()
@@ -22,10 +21,13 @@ Scheduler *-up- Timer
 
 abstract class Task {
     - myPeriod: int
+    - elapsedTime: int
     - actualState: State*
-    + init(period: int)
-    + changeState(nextState: State*)
-    + {abstract} tick()
+    + Task(period: int)
+    + init(state: State*)
+    + stateTransition(nextState: State*)
+    + execute()
+    + updateAndCheckTime(basePeriod: int): bool
 }
 
 Scheduler *-right- Task
@@ -43,8 +45,7 @@ abstract class State {
     - task: Task*
     + setTask(task: Task*)
     + getTask(): Task*
-    + {abstract} do()
-    + {abstract} nextState(): State
+    + {abstract} handle()
 }
 
 Task o-right- State
