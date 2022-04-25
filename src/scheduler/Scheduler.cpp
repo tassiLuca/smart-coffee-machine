@@ -4,19 +4,20 @@
 #include "Scheduler.h"
 
 Scheduler::Scheduler(const int basePeriod): basePeriod(basePeriod) {
-    this->elapsedTime = 0;
+    elapsedTime = 0;
+    timer.setupPeriod(basePeriod);
 }
 
 void Scheduler::addTask(Task* const task) {
-    this->activeTasks.push_back(task);
+    activeTasks.push_back(task);
 }
 
 void Scheduler::schedule() {
+    timer.waitForNextTick();
     std::list<Task*>::iterator task;
-    for (task = this->activeTasks.begin(); task != this->activeTasks.end(); task++) {
-        if ((*task)->updateAndCheckTime(this->basePeriod)) {
+    for (task = activeTasks.begin(); task != activeTasks.end(); task++) {
+        if ((*task)->updateAndCheckTime(basePeriod)) {
             (*task)->tick();
         }
     }
-    delay(this->basePeriod);
 }
