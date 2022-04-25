@@ -4,9 +4,9 @@
 /**
  * @brief Button pins. 
  */
-#define UP_BTN   2
-#define DOWN_BTN 5
-#define MAKE_BTN 6
+#define UP_BTN   5
+#define DOWN_BTN 6
+#define MAKE_BTN 9
 
 /**
  * @brief Sonar pins. 
