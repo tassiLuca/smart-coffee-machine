@@ -2,10 +2,10 @@
 #define __MAIN_TASK__
 
 #include "../setup.h"
-#include "Task.h"
+#include "BaseTask.h"
 #include "../boundary/DisplayImpl.h"
 
-class MainTask: public Task 
+class MainTask: public BaseTask 
 {
 
 private:

@@ -3,6 +3,8 @@
 
 #include "../Task.h"
 
+class Task;
+
 /**
  * @brief A virtual class declaring the contract that all 
  * concrete states must implement. 
@@ -15,9 +17,8 @@ private:
     Task* task;
 
 public:
-    ~State() {
-        delete task;
-    }
+
+    virtual ~State() {}
 
     /**
      * @brief Set a backreference to the Task object.
