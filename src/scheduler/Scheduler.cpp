@@ -1,6 +1,4 @@
 #include <iterator>
-#include <Arduino.h>
-
 #include "Scheduler.h"
 
 Scheduler::Scheduler(const int basePeriod): basePeriod(basePeriod) {
