@@ -1,4 +1,4 @@
-#include "Timer.h"
+#include "SchedulerTimer.h"
 #include "Arduino.h"
 
 volatile bool timerFlag;
@@ -7,11 +7,11 @@ ISR(TIMER1_COMPA_vect){
     timerFlag = true;
 }
 
-Timer::Timer(){
+SchedulerTimer::SchedulerTimer(){
     timerFlag = false;  
 }
 
-void Timer::setupFreq(int freq){
+void SchedulerTimer::setupFreq(int freq){
     
     // disabling interrupt
     cli();
@@ -40,7 +40,7 @@ void Timer::setupFreq(int freq){
 }
 
 /* period in ms */
-void Timer::setupPeriod(int period){
+void SchedulerTimer::setupPeriod(int period){
     
     // disabling interrupt
     cli();
@@ -69,7 +69,7 @@ void Timer::setupPeriod(int period){
   
 }
 
-void Timer::waitForNextTick(){
+void SchedulerTimer::waitForNextTick(){
     /* wait for timer signal */
     while (!timerFlag){}
     timerFlag = false;
