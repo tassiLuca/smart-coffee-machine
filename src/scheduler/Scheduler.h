@@ -1,10 +1,10 @@
 #ifndef __SCHEDULER__
 #define __SCHEDULER__
 
+#include <SchedulerTimer.h>
 #include <ArduinoSTL.h>
 #include <list>
 #include "../tasks/Task.h"
-#include "Timer.h"
 
 /**
  * @brief A class modeling a scheduler.
@@ -15,7 +15,7 @@ private:
     int basePeriod;
     int elapsedTime;
     std::list<Task*> activeTasks;
-    Timer timer;
+    SchedulerTimer timer;
 
 public:
     /**
