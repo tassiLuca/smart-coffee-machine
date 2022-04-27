@@ -7,7 +7,7 @@ class ReadyState : public State {
 
 private:
     void dispaySelectedProduct();
-    void checkInputOccurred();
+    void displayReadyMessage();
     // check interrupt T_idle
 
 public:

@@ -20,6 +20,8 @@ private:
     Button* upButton;
     Button* downButton;
     Button* makeButton;
+    Product* getNextProduct();
+    Product* getPrevProduct();
 
 public:
     Product* getSelectedProduct();

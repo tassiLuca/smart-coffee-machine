@@ -1,7 +1,5 @@
 #include "MachineImpl.h"
 #include "ProductImpl.h"
-#include <ArduinoSTL.h>
-#include <iterator>
 
 MachineImpl::MachineImpl(const int productsQuantity) {
     // sensors and actuators
@@ -33,16 +31,37 @@ Product* MachineImpl::getSelectedProduct() {
     return selectedProduct;
 }
 
-
 bool MachineImpl::getAndUpdateSelectedProduct() {
     if (upButton->isPressed()) {
-        Serial.println("Pushed button up");
+        Serial.println("UP PRESSED");
+        selectedProduct = getNextProduct();
         return true;
     } else if (downButton->isPressed()) {
-        Serial.println("Pushed button down");
+        Serial.println("DOWN PRESSED");
+        selectedProduct = getPrevProduct();
         return true;
     }
     return false;
+}
+
+Product* MachineImpl::getNextProduct() {
+    std::list<Product*>::iterator product;
+    for (product = products.begin(); product != products.end(); product++) {
+        if ((*product) == selectedProduct) {
+            return (*product == products.back() ? products.front() : *(++product));
+        }
+    }
+    return nullptr;
+}
+
+Product* MachineImpl::getPrevProduct() {
+    std::list<Product*>::iterator product;
+    for (product = products.begin(); product != products.end(); product++) {
+        if ((*product) == selectedProduct) {
+            return (*product == products.front() ? products.back() : *(--product));
+        }
+    }
+    return nullptr;
 }
 
 void MachineImpl::getAndUpdateSugarLevel() {
