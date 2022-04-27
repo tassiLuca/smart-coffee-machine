@@ -17,7 +17,11 @@ MachineImpl::MachineImpl(const int productsQuantity) {
 }
 
 void MachineImpl::displayMessage(String msg) {
-    display->clear();
+    static String oldMsg;
+    if (msg != oldMsg) {
+        display->clear();
+        oldMsg = msg;
+    }
     display->print(msg);
 }
 
