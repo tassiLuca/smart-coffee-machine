@@ -29,7 +29,7 @@
 #define DISPLAY_ROWS 2
 
 // Servo motor.
-#define SERVO_MOTOR_PIN 10
+#define SERVO_MOTOR_PIN 11
 
 
 #endif
