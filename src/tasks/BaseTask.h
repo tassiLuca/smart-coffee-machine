@@ -10,9 +10,13 @@ private:
     const int myPeriod;
     int elapsedTime;
     State* currentState;
+    Machine* machine;
 
 public:
-    BaseTask(const int period) : myPeriod(period) {
+    BaseTask(const int period, Machine* machine) 
+        : myPeriod(period)
+        , machine(machine) 
+    {
         elapsedTime = 0;
     }
 
@@ -41,6 +45,10 @@ public:
         } else {
             return false;
         }
+    }
+
+    Machine* getMachine() {
+        return machine;
     }
 
 };

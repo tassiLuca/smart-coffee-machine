@@ -8,12 +8,8 @@
 class MainTask: public BaseTask 
 {
 
-private:
-    // TODO: add peer
-    Display* display;
-
 public:
-    MainTask(const int period);
+    MainTask(const int period, Machine* machine);
 
 };
 
