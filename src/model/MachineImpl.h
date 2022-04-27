@@ -7,6 +7,7 @@
 
 #include "../setup.h"
 #include "boundary/DisplayImpl.h"
+#include "boundary/ButtonImpl.h"
 
 class MachineImpl : public Machine 
 {
@@ -16,13 +17,15 @@ private:
     std::list<Product*> products;
     Product* selectedProduct;
     Display* display;
+    Button* upButton;
+    Button* downButton;
+    Button* makeButton;
 
 public:
     Product* getSelectedProduct();
     void selectProduct(Product* product);
-    // void addSugar();
-    // void make();
-    // void test();
+    void getAndUpdateSugarLevel();
+    bool getAndUpdateSelectedProduct();
     void displayMessage(String msg);
 
     class Builder {

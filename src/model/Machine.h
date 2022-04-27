@@ -9,9 +9,8 @@ class Machine
 public:
     virtual Product* getSelectedProduct() = 0;
     virtual void selectProduct(Product* product) = 0;
-    // virtual void addSugar() = 0;
-    // virtual void make() = 0;
-    // virtual void test() = 0;
+    virtual void getAndUpdateSugarLevel() = 0;
+    virtual bool getAndUpdateSelectedProduct() = 0;
     virtual void displayMessage(String msg) = 0;
 
 };

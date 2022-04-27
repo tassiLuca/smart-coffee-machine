@@ -6,5 +6,5 @@ ButtonImpl::ButtonImpl(const int buttonPin) : pin(buttonPin) {
 }
 
 bool ButtonImpl::isPressed() {
-    return digitalRead(pin) == HIGH;
+    return digitalRead(pin) == LOW;
 }

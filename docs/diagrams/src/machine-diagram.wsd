@@ -1,0 +1,30 @@
+@startuml machine-diagram 
+
+interface Machine {
+    + getSelectedProduct() : Product*
+    + selectProduct(product: Product*)
+    + displayMessage(msg: String)
+    + make()
+    + isDispensing(): bool
+    + isAvailable(): bool
+}
+
+class MachineImpl {
+    - display: Display*
+    - stepperMotor: StepperMotor*
+    - products: list<Product*>
+    - selectedProduct: Product*
+
+    + getSelectedProduct() : Product*
+    + selectProduct(product: Product*)
+    + displayMessage(msg: String)
+    + make()
+    + isDispensing(): bool
+    + isAvailable(): bool
+}
+
+Machine <|-- MachineImpl
+
+
+
+@enduml

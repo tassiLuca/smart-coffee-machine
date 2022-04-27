@@ -1,8 +1,15 @@
 #include "MachineImpl.h"
 #include "ProductImpl.h"
+#include <ArduinoSTL.h>
+#include <iterator>
 
 MachineImpl::MachineImpl(const int productsQuantity) {
+    // sensors and actuators
     display = new DisplayImpl(DISPLAY_ROWS, DISPLAY_COLS);
+    upButton = new ButtonImpl(UP_BTN);
+    downButton = new ButtonImpl(DOWN_BTN);
+    makeButton = new ButtonImpl(MAKE_BTN);
+    // products
     products.push_back(new ProductImpl("Coffee", productsQuantity));
     products.push_back(new ProductImpl("Tea", productsQuantity));
     products.push_back(new ProductImpl("Chocolate", productsQuantity));
@@ -20,6 +27,22 @@ void MachineImpl::selectProduct(Product* product) {
 
 Product* MachineImpl::getSelectedProduct() {
     return selectedProduct;
+}
+
+
+bool MachineImpl::getAndUpdateSelectedProduct() {
+    if (upButton->isPressed()) {
+        Serial.println("Pushed button up");
+        return true;
+    } else if (downButton->isPressed()) {
+        Serial.println("Pushed button down");
+        return true;
+    }
+    return false;
+}
+
+void MachineImpl::getAndUpdateSugarLevel() {
+
 }
 
 /////////////////////////////////// BUILDER //////////////////////////////////////////
