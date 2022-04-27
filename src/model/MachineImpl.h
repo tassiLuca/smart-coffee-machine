@@ -23,6 +23,9 @@ public:
     // void make();
     // void test();
 
+    void displayMessage(String msg);
+
+
     class Builder {
 
     private:

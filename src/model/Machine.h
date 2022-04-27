@@ -13,6 +13,8 @@ public:
     // virtual void make() = 0;
     // virtual void test() = 0;
 
+    virtual void displayMessage(String msg) = 0;
+
 };
 
 #endif

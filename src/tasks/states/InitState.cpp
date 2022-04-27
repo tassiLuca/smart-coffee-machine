@@ -1,7 +1,13 @@
-#include "InitState.h"
-
 #include <Arduino.h>
+#include "InitState.h"
+#include "ReadyState.h"
+
+#define STATE_DURATION 3000
 
 void InitState::handle() {
-    Serial.println("ESEGUENDO INIT");
+    static unsigned long enteredTime = millis();
+    this->getTask()->getMachine()->displayMessage("Welcome :)");
+    if (millis() - enteredTime > STATE_DURATION) {
+        this->getTask()->stateTransition(new ReadyState());
+    }
 }
