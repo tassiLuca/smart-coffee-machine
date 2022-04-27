@@ -13,18 +13,17 @@ class MachineImpl : public Machine
 
 private:
     MachineImpl(const int productsQuantity);
-    std::list<int> products;
+    std::list<Product*> products;
+    Product* selectedProduct;
     Display* display;
 
 public:
-    // Product* getSelectedProduct();
-    // void selectProduct(Product* product);
+    Product* getSelectedProduct();
+    void selectProduct(Product* product);
     // void addSugar();
     // void make();
     // void test();
-
     void displayMessage(String msg);
-
 
     class Builder {
 

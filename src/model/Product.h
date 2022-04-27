@@ -8,7 +8,7 @@ class Product {
 public:
     virtual int getLeftQuantity() = 0;
     virtual bool isAvailable() = 0;
-    virtual std::string toString() = 0;
+    virtual String toString() = 0;
 
 };
 

@@ -6,14 +6,14 @@
 class ProductImpl : public Product {
 
 private:
-    std::string name;
     int quantity;
+    String productName;
 
 public:
-    ProductImpl(const int maxQuantity);
+    ProductImpl(const String name, const int maxQuantity);
     int getLeftQuantity();
     bool isAvailable();
-    std::string toString();
+    String toString();
 
 };
 
