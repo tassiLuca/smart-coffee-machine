@@ -10,9 +10,9 @@ Machine* machine;
 void setup() {
     Serial.begin(9600); // TODO
     machine = (new MachineImpl::Builder)->build();
-    scheduler = new Scheduler(300);
+    scheduler = new Scheduler(50);
     // Creates all the tasks
-    Task* t = new MainTask(300, machine);
+    Task* t = new MainTask(100, machine);
     scheduler->addTask(t);
 }
 
