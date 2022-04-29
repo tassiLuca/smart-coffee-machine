@@ -56,7 +56,7 @@ public:
     }
 
     Machine* getMachine() {
-        return this->task->getMachine();
+        return getTask()->getMachine();
     }
 
     /**

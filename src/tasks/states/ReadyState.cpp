@@ -21,6 +21,7 @@ void ReadyState::checkTransitions() {
     if (millis() - lastInteraction > IDLE_TIMEOUT) {
         getTask()->stateTransition(new SleepState());
     } else if (getMachine()->isMaking()) {
+        getMachine()->setMachineState(DISPENSING);
         getTask()->stateTransition(new MakingState());
     } else if (getMachine()->getMachineState() == ASSISTANCE) {
         getTask()->stateTransition(new AssistanceState());

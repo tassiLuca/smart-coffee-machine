@@ -14,7 +14,7 @@ private:
     std::list<Product*> products;
     int sugarLevel;
     Product* selectedProduct;
-    MachineState currentState;
+    MachineState currentState = READY;
     bool making = false;
     // sensors
     Display* display;
@@ -22,6 +22,7 @@ private:
     Button* downButton;
     Button* makeButton;
     Potentiometer* pot;
+    ServoMotor* servoMotor;
     // methods
     std::list<Product*>::iterator getRefToCurrentSelectedProduct();
 

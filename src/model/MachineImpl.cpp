@@ -15,6 +15,8 @@ MachineImpl::MachineImpl(const int productsQuantity) {
     downButton = f->createButton(DOWN_BTN);
     makeButton = f->createButton(MAKE_BTN);
     pot = f->createPotentiometer(POTENTIOMETER_PIN);
+    servoMotor = f->createServoMotor(SERVO_MOTOR_PIN);
+    servoMotor->on();
     // products
     products.push_back(new ProductImpl("Coffee", productsQuantity));
     products.push_back(new ProductImpl("Tea", productsQuantity));
@@ -80,5 +82,11 @@ bool MachineImpl::isMaking() {
 }
 
 void MachineImpl::make() {
-    Serial.println("Stepper moves");
+    static int angle = 0;
+    making = true;
+    servoMotor->setPosition(angle++);
+    if (angle == 180) {
+        angle = 0;
+        making = false;
+    }
 }

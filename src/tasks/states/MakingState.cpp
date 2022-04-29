@@ -3,7 +3,6 @@
 #include "ReadyState.h"
 
 void MakingState::handle() {
-    getMachine()->setMachineState(DISPENSING);
     if (getMachine()->getMachineState() == ASSISTANCE) {
         getTask()->stateTransition(new AssistanceState());
     } else if (getMachine()->getMachineState() == READY) {
