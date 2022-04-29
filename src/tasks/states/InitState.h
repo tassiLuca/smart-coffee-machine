@@ -2,6 +2,7 @@
 #define __INIT_STATE__
 
 #include "State.h"
+#include "boundary/Display.h"
 
 class InitState : public State
 {

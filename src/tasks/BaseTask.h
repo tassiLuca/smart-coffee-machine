@@ -11,12 +11,14 @@ private:
     int elapsedTime;
     State* currentState;
     Machine* machine;
+    CoffeeMachine* coffeMachineSensors;
 
 public:
     BaseTask(const int period, Machine* machine) 
         : myPeriod(period)
         , machine(machine) 
     {
+        coffeMachineSensors = new CoffeeMachine();
         elapsedTime = 0;
     }
 
@@ -49,6 +51,10 @@ public:
 
     Machine* getMachine() {
         return machine;
+    }
+
+    CoffeeMachine* getSensors() {
+        return coffeMachineSensors;
     }
 
 };

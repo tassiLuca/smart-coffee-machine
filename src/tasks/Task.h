@@ -3,6 +3,7 @@
 
 #include "states/State.h"
 #include "../model/Machine.h"
+#include "../boundary/CoffeeMachine.h"
 
 class State;
 
@@ -22,6 +23,9 @@ public:
     virtual bool updateAndCheckTime(const int basePeriod) = 0;
 
     virtual Machine* getMachine() = 0;
+
+    virtual CoffeeMachine* getSensors() = 0;
+
     
 };
 

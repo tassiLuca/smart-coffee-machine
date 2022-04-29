@@ -5,42 +5,21 @@
 #include <list>
 #include "Machine.h"
 
-#include "../setup.h"
-#include "boundary/DisplayImpl.h"
-#include "boundary/ButtonImpl.h"
-
 class MachineImpl : public Machine 
 {
 
 private:
-    MachineImpl(const int productsQuantity);
     std::list<Product*> products;
     Product* selectedProduct;
-    Display* display;
-    Button* upButton;
-    Button* downButton;
-    Button* makeButton;
-    Product* getNextProduct();
-    Product* getPrevProduct();
+    int sugarLevel;
+    Product* getPointerToCurrentSelectedProduct();
 
 public:
-    Product* getSelectedProduct();
-    void selectProduct(Product* product);
-    void getAndUpdateSugarLevel();
-    bool getAndUpdateSelectedProduct();
-    void displayMessage(String msg);
-
-    class Builder {
-
-    private:
-        bool consumed = false;
-        int productsQuantity = 100;
-
-    public:
-        Builder* initProductsQuantity(const int quantity);
-        MachineImpl* build();
-
-    };
+    MachineImpl(const int productsQuantity);
+    void selectNextProduct();
+    void selectPreviousProduct();
+    void addSugarLevel();
+    void decreaseSugarLevel();
 
 };
 

@@ -1,83 +1,125 @@
 #include "MachineImpl.h"
 #include "ProductImpl.h"
 
+#define SUGAR_LEVELS 5
+
 MachineImpl::MachineImpl(const int productsQuantity) {
-    // sensors and actuators
-    display = new DisplayImpl(DISPLAY_ROWS, DISPLAY_COLS);
-    upButton = new ButtonImpl(UP_BTN);
-    downButton = new ButtonImpl(DOWN_BTN);
-    makeButton = new ButtonImpl(MAKE_BTN);
     // products
     products.push_back(new ProductImpl("Coffee", productsQuantity));
     products.push_back(new ProductImpl("Tea", productsQuantity));
     products.push_back(new ProductImpl("Chocolate", productsQuantity));
     selectedProduct = products.front();
+    sugarLevel = 1;
 }
 
-void MachineImpl::displayMessage(String msg) {
-    static String oldMsg;
-    if (msg != oldMsg) {
-        display->clear();
-        oldMsg = msg;
-    }
-    display->print(msg);
-}
-
-void MachineImpl::selectProduct(Product* product) {
-    selectedProduct = product;
-}
-
-Product* MachineImpl::getSelectedProduct() {
-    return selectedProduct;
-}
-
-bool MachineImpl::getAndUpdateSelectedProduct() {
-    if (upButton->isPressed()) {
-        Serial.println("UP PRESSED");
-        selectedProduct = getNextProduct();
-        return true;
-    } else if (downButton->isPressed()) {
-        Serial.println("DOWN PRESSED");
-        selectedProduct = getPrevProduct();
-        return true;
-    }
-    return false;
-}
-
-Product* MachineImpl::getNextProduct() {
+Product* MachineImpl::getPointerToCurrentSelectedProduct() {
     std::list<Product*>::iterator product;
     for (product = products.begin(); product != products.end(); product++) {
         if ((*product) == selectedProduct) {
-            return (*product == products.back() ? products.front() : *(++product));
+            return *product;
         }
     }
     return nullptr;
 }
 
-Product* MachineImpl::getPrevProduct() {
-    std::list<Product*>::iterator product;
-    for (product = products.begin(); product != products.end(); product++) {
-        if ((*product) == selectedProduct) {
-            return (*product == products.front() ? products.back() : *(--product));
-        }
-    }
-    return nullptr;
+void MachineImpl::selectNextProduct() {
+    auto tmp = getPointerToCurrentSelectedProduct();
+    selectedProduct = (tmp == products.back() ? products.front() : (tmp + 1));
 }
 
-void MachineImpl::getAndUpdateSugarLevel() {
-
+void MachineImpl::selectPreviousProduct() {
+    auto tmp = getPointerToCurrentSelectedProduct();
+    selectedProduct = (tmp == products.front() ? products.back() : (tmp - 1));
 }
 
-/////////////////////////////////// BUILDER //////////////////////////////////////////
-MachineImpl::Builder* MachineImpl::Builder::initProductsQuantity(const int quantity) {
-    productsQuantity = quantity;
-    return this;
+void MachineImpl::addSugarLevel() {
+    sugarLevel += 1;
 }
 
-MachineImpl* MachineImpl::Builder::build() {
-    if (consumed) {
-        return nullptr;
-    }
-    consumed = true;
-    return new MachineImpl(productsQuantity);
+void MachineImpl::decreaseSugarLevel() {
+    sugarLevel -= 1;
 }
+
+// void MachineImpl::displayMessage(String msg) {
+//     static String oldMsg;
+//     if (msg != oldMsg) {
+//         display->clear();
+//         oldMsg = msg;
+//     }
+//     display->print(msg);
+// }
+
+// void MachineImpl::displaySelectedProduct() {
+//     displayMessage("S: " + String(sugarLevel) + " P:" + selectedProduct->toString());
+// }
+
+// bool MachineImpl::getAndUpdateSelectedProduct() {
+//     if (upButton->isPressed()) {
+//         selectedProduct = getNextProduct();
+//         return true;
+//     } else if (downButton->isPressed()) {
+//         selectedProduct = getPrevProduct();
+//         return true;
+//     }
+//     return false;
+// }
+
+// Product* MachineImpl::getNextProduct() {
+//     std::list<Product*>::iterator product;
+//     for (product = products.begin(); product != products.end(); product++) {
+//         if ((*product) == selectedProduct) {
+//             return (*product == products.back() ? products.front() : *(++product));
+//         }
+//     }
+//     return nullptr;
+// }
+
+// Product* MachineImpl::getPrevProduct() {
+//     std::list<Product*>::iterator product;
+//     for (product = products.begin(); product != products.end(); product++) {
+//         if ((*product) == selectedProduct) {
+//             return (*product == products.front() ? products.back() : *(--product));
+//         }
+//     }
+//     return nullptr;
+// }
+
+// bool MachineImpl::getAndUpdateSugarLevel() {
+//     int newSugarLevel = map(potentiometer->getValue(), 0, 1024, 1, SUGAR_LEVELS + 1);
+//     if (sugarLevel != newSugarLevel) {
+//         sugarLevel = newSugarLevel;
+//         return true;
+//     }
+//     return false;
+// }
+
+// bool MachineImpl::isMakeSelected() {
+//     if (makeButton->isPressed()) {
+//         servoMotor->on();
+//         return true;
+//     }
+//     return false;
+// }
+
+// bool MachineImpl::isMaking() {
+//     return making;
+// }
+
+// void MachineImpl::make() {
+//     static int i = 0;
+//     making = true;
+//     servoMotor->setPosition(i);
+//     if (++i == 181) {
+//         making = false;
+//         servoMotor->off();
+//     }
+// }
+
+// int MachineImpl::getTotalAmountOfProducts() {
+//     int count = 0;
+//     std::list<Product*>::iterator product;
+//     for (product = products.begin(); product != products.end(); product++) {
+//         count += (*product)->getLeftQuantity();
+//     }
+//     return count;
+// }
