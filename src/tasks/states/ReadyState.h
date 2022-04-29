@@ -1,7 +1,7 @@
 #ifndef __READY_STATE__
 #define __READY_STATE__
 
-#include "State.h"
+#include "../Task.h"
 
 class ReadyState : public State {
 

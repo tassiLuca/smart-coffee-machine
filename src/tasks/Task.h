@@ -1,7 +1,6 @@
 #ifndef __TASK__
 #define __TASK__
 
-#include "states/State.h"
 #include "../model/Machine.h"
 
 class State;
@@ -23,6 +22,49 @@ public:
 
     virtual Machine* getMachine() = 0;
     
+};
+
+/**
+ * @brief A virtual class declaring the contract that all 
+ * concrete states must implement. 
+ * @see State Pattern GoF
+ */
+class State 
+{
+
+private:
+    Task* task;
+
+public:
+
+    virtual ~State() {}
+
+    /**
+     * @brief Set a backreference to the Task object.
+     * @param task a pointer to the task.
+     */
+    void setTask(Task* task) {
+        this->task = task;
+    }
+
+    /**
+     * @brief Get the reference of Task object.
+     * @return Task* 
+     */
+    Task* getTask() {
+        return this->task;
+    }
+
+    Machine* getMachine() {
+        return this->task->getMachine();
+    }
+
+    /**
+     * @brief A virtual method which implements the logic
+     * associated to the concrete state. 
+     */
+    virtual void handle() = 0;
+
 };
 
 #endif

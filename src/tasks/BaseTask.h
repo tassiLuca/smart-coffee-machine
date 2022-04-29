@@ -1,7 +1,6 @@
 #ifndef __BASE_TASK__
 #define __BASE_TASK__
 
-#include "states/State.h"
 #include "Task.h"
 
 class BaseTask : public Task {
