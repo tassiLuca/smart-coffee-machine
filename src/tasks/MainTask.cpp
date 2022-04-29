@@ -3,8 +3,8 @@
 #include "MainTask.h"
 #include "states/InitState.h"
 
-MainTask::MainTask(const int period, Machine* machine) 
-    : BaseTask(period, machine) 
+MainTask::MainTask(const int period) 
+    : BaseTask(period) 
 {
     MainTask::init(new InitState());
 }

@@ -7,7 +7,7 @@ class MainTask: public BaseTask
 {
 
 public:
-    MainTask(const int period, Machine* machine);
+    MainTask(const int period);
 
 };
 
