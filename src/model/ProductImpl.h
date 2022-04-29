@@ -11,9 +11,9 @@ private:
 
 public:
     ProductImpl(const String name, const int maxQuantity);
-    int getLeftQuantity();
-    bool isAvailable();
-    String toString();
+    int getLeftQuantity() override;
+    bool isAvailable() override;
+    String toString() override;
 
 };
 

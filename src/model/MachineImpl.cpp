@@ -36,12 +36,8 @@ void MachineImpl::updateSugarLevel(const int amount) {
     sugarLevel += 1;
 }
 
-Product* MachineImpl::getSelectedProduct() {
-    return selectedProduct;
-}
-
-int MachineImpl::getSugarLevel() {
-    return sugarLevel;
+String MachineImpl::getInfoSelection() {
+    return "Choice " + selectedProduct->toString() + " Sugar: " + String(sugarLevel);
 }
 
 // void MachineImpl::displayMessage(String msg) {

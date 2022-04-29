@@ -16,11 +16,10 @@ private:
 
 public:
     MachineImpl(const int productsQuantity);
-    void selectNextProduct();
-    void selectPreviousProduct();
-    Product* getSelectedProduct();
-    void updateSugarLevel(const int amount);
-    int getSugarLevel();
+    void selectNextProduct() override;
+    void selectPreviousProduct() override;
+    void updateSugarLevel(const int amount) override;
+    String getInfoSelection() override;
 
 };
 

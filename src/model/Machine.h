@@ -24,17 +24,15 @@ public:
     virtual void selectPreviousProduct() = 0;
 
     /**
-     * @brief Gets the selected product.
-     * @return Product* 
-     */
-    virtual Product* getSelectedProduct() = 0;
-
-    /**
      * @brief Update the sugar level.
      */
     virtual void updateSugarLevel(const int amount) = 0;
 
-    virtual int getSugarLevel() = 0;
+    /**
+     * @brief Gets the machine infos of the selected product.
+     * @return String containing the product selected and the sugar level. 
+     */
+    virtual String getInfoSelection() = 0;
 
 };
 
