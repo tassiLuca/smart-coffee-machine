@@ -4,43 +4,28 @@
 #include <ArduinoSTL.h>
 #include <list>
 #include "Machine.h"
-
-#include "../setup.h"
-#include "boundary/DisplayImpl.h"
-#include "boundary/ButtonImpl.h"
+#include "../boundary/CoffeeMachineFactory.h"
 
 class MachineImpl : public Machine 
 {
 
 private:
-    MachineImpl(const int productsQuantity);
     std::list<Product*> products;
+    int sugarLevel;
     Product* selectedProduct;
     Display* display;
     Button* upButton;
     Button* downButton;
     Button* makeButton;
-    Product* getNextProduct();
-    Product* getPrevProduct();
+    Potentiometer* pot;
+    std::list<Product*>::iterator getRefToCurrentSelectedProduct();
 
 public:
-    Product* getSelectedProduct();
-    void selectProduct(Product* product);
-    void getAndUpdateSugarLevel();
+    MachineImpl(const int productsQuantity);
+    bool getAndUpdateSugarLevel();
     bool getAndUpdateSelectedProduct();
     void displayMessage(String msg);
-
-    class Builder {
-
-    private:
-        bool consumed = false;
-        int productsQuantity = 100;
-
-    public:
-        Builder* initProductsQuantity(const int quantity);
-        MachineImpl* build();
-
-    };
+    void displaySelections();
 
 };
 

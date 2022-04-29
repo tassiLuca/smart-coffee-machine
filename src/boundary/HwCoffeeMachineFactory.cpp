@@ -1,28 +1,36 @@
-#ifndef __HW_COFFEE_MACHINE_FACTORY__
-#define __HW_COFFEE_MACHINE_FACTORY__
+#include "HwCoffeeMachineFactory.h"
 
-#include "CoffeeMachineFactory.h"
+#include "ButtonImpl.h"
+#include "PotentiometerImpl.h"
+#include "DisplayImpl.h"
+#include "ServoMotorImpl.h"
+#include "TemperatureSensorImpl.h"
+#include "UltrasonicImpl.h"
 
-class HwCoffeMachineFactory : public CoffeeMachineFactory {
+Button* HwCoffeMachineFactory::createButton(const int buttonPin) const {
+    return new ButtonImpl(buttonPin);
+}
 
-public:
+Potentiometer* HwCoffeMachineFactory::createPotentiometer(const int potentiometerPin) const {
+    return new PotentiometerImpl(potentiometerPin);
+}
 
-    Button* createButton(const int buttonPin) const override;
+Display* HwCoffeMachineFactory::createDisplay(const int rows, const int cols) const {
+    return new DisplayImpl(rows, cols);
+}
 
-    Potentiometer* createPotentiometer(const int potentiometerPin) const override;
+ServoMotor* HwCoffeMachineFactory::createServoMotor(const int servoMotorPin) const {
+    return new ServoMotorImpl(servoMotorPin);
+}
 
-    Display* createDisplay(const int rows, const int cols) const override;
+TemperatureSensor* HwCoffeMachineFactory::createTemperatureSensor(const int tempSensorPin) const {
+    return new TemperatureSensorImpl(tempSensorPin);
+}
 
-    ServoMotor* createServoMotor(const int servoMotorPin) const override;
+Ultrasonic* HwCoffeMachineFactory::createUltrasonic(const int triggerPin, const int echoPin) const {
+    return new UltrasonicImpl(triggerPin, echoPin);
+}
 
-    TemperatureSensor* createTemperatureSensor(const int tempSensorPin) const override;
-
-    Ultrasonic* createUltrasonic(const int triggerPin, const int echoPin) const override;
-
-    /**
-     * @todo createPirSensor() 
-     */
-
-};
-
-#endif
+/**
+ * @todo createPirSensor() 
+ */

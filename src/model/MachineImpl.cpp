@@ -1,17 +1,30 @@
 #include "MachineImpl.h"
 #include "ProductImpl.h"
 
+#include "../setup.h"
+#include "../boundary/HwCoffeeMachineFactory.h"
+
+#define DEFAULT_SUGAR 1
+#define MAX_SUGAR_LEVEL 5
+
 MachineImpl::MachineImpl(const int productsQuantity) {
     // sensors and actuators
-    display = new DisplayImpl(DISPLAY_ROWS, DISPLAY_COLS);
-    upButton = new ButtonImpl(UP_BTN);
-    downButton = new ButtonImpl(DOWN_BTN);
-    makeButton = new ButtonImpl(MAKE_BTN);
+    CoffeeMachineFactory* f = new HwCoffeMachineFactory();
+    display = f->createDisplay(DISPLAY_ROWS, DISPLAY_COLS);
+    upButton = f->createButton(UP_BTN);
+    downButton = f->createButton(DOWN_BTN);
+    makeButton = f->createButton(MAKE_BTN);
+    pot = f->createPotentiometer(POTENTIOMETER_PIN);
     // products
     products.push_back(new ProductImpl("Coffee", productsQuantity));
     products.push_back(new ProductImpl("Tea", productsQuantity));
     products.push_back(new ProductImpl("Chocolate", productsQuantity));
     selectedProduct = products.front();
+    sugarLevel = DEFAULT_SUGAR;
+}
+
+void MachineImpl::displaySelections() {
+    displayMessage(selectedProduct->toString() + " - " + String(sugarLevel));
 }
 
 void MachineImpl::displayMessage(String msg) {
@@ -23,61 +36,33 @@ void MachineImpl::displayMessage(String msg) {
     display->print(msg);
 }
 
-void MachineImpl::selectProduct(Product* product) {
-    selectedProduct = product;
-}
-
-Product* MachineImpl::getSelectedProduct() {
-    return selectedProduct;
-}
-
 bool MachineImpl::getAndUpdateSelectedProduct() {
     if (upButton->isPressed()) {
-        Serial.println("UP PRESSED");
-        selectedProduct = getNextProduct();
+        auto tmp = getRefToCurrentSelectedProduct();
+        selectedProduct = (*tmp == products.front() ? products.back() : *(--tmp));
         return true;
     } else if (downButton->isPressed()) {
-        Serial.println("DOWN PRESSED");
-        selectedProduct = getPrevProduct();
+        auto tmp = getRefToCurrentSelectedProduct();
+        selectedProduct = (*tmp == products.back() ? products.front() : *(++tmp));
         return true;
     }
     return false;
 }
 
-Product* MachineImpl::getNextProduct() {
+std::list<Product*>::iterator MachineImpl::getRefToCurrentSelectedProduct() {
     std::list<Product*>::iterator product;
     for (product = products.begin(); product != products.end(); product++) {
         if ((*product) == selectedProduct) {
-            return (*product == products.back() ? products.front() : *(++product));
+            return product;
         }
     }
-    return nullptr;
 }
 
-Product* MachineImpl::getPrevProduct() {
-    std::list<Product*>::iterator product;
-    for (product = products.begin(); product != products.end(); product++) {
-        if ((*product) == selectedProduct) {
-            return (*product == products.front() ? products.back() : *(--product));
-        }
+bool MachineImpl::getAndUpdateSugarLevel() {
+    int newSugarLevel = map(pot->getValue(), 0, 1024, DEFAULT_SUGAR, MAX_SUGAR_LEVEL + 1);
+    if (sugarLevel != newSugarLevel) {
+        sugarLevel = newSugarLevel;
+        return true;
     }
-    return nullptr;
-}
-
-void MachineImpl::getAndUpdateSugarLevel() {
-
-}
-
-/////////////////////////////////// BUILDER //////////////////////////////////////////
-MachineImpl::Builder* MachineImpl::Builder::initProductsQuantity(const int quantity) {
-    productsQuantity = quantity;
-    return this;
-}
-
-MachineImpl* MachineImpl::Builder::build() {
-    if (consumed) {
-        return nullptr;
-    }
-    consumed = true;
-    return new MachineImpl(productsQuantity);
+    return false;
 }

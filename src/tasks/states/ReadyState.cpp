@@ -4,12 +4,17 @@
 #define PRODUCT_SELECTION_DURATION 5000
 
 void ReadyState::handle() {
-    static unsigned long t0 = 0;
-    bool res = this->getTask()->getMachine()->getAndUpdateSelectedProduct();
-    if (res) {
-        t0 = millis();
+    updateSelections();
+}
+
+void ReadyState::updateSelections() {
+    static unsigned long lastSelectionTimestamp = 0;
+    bool changedSelection = getMachine()->getAndUpdateSelectedProduct();
+    bool changedSugar = getMachine()->getAndUpdateSugarLevel();
+    if (changedSelection || changedSugar) {
+        lastSelectionTimestamp = millis();
     }
-    if (millis() - t0 < PRODUCT_SELECTION_DURATION) {
+    if (millis() - lastSelectionTimestamp < PRODUCT_SELECTION_DURATION) {
         dispaySelectedProduct();
     } else {
         displayReadyMessage();
@@ -17,11 +22,9 @@ void ReadyState::handle() {
 }
 
 void ReadyState::dispaySelectedProduct() {
-    String msg = "Product: " + this->getTask()->getMachine()->getSelectedProduct()->toString();
-    this->getTask()->getMachine()->displayMessage(msg);
+    this->getMachine()->displaySelections();
 }
 
 void ReadyState::displayReadyMessage() {
-    this->getTask()->getMachine()->displayMessage("Ready");
+    this->getMachine()->displayMessage("Ready");
 }
-

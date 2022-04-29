@@ -6,8 +6,8 @@
 
 void InitState::handle() {
     static unsigned long enteredTime = millis();
-    this->getTask()->getMachine()->displayMessage("Welcome :)");
+    getMachine()->displayMessage("Welcome :)");
     if (millis() - enteredTime > STATE_DURATION) {
-        this->getTask()->stateTransition(new ReadyState());
+        getTask()->stateTransition(new ReadyState());
     }
 }
