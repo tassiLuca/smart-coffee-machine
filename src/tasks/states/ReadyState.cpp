@@ -1,10 +1,26 @@
 #include <Arduino.h>
 #include "ReadyState.h"
+#include "MakingState.h"
+#include "SleepState.h"
+#include "AssistanceState.h"
 
 #define PRODUCT_SELECTION_DURATION 5000
+#define IDLE_TIMEOUT 10000
 
 void ReadyState::handle() {
+    checkTransitions();
     updateSelections();
+}
+
+void ReadyState::checkTransitions() {
+    static unsigned long enteredTime = millis();
+    if (millis() - enteredTime > IDLE_TIMEOUT) {
+        getTask()->stateTransition(new SleepState());
+    } else if (getMachine()->isMaking()) {
+        getTask()->stateTransition(new MakingState());
+    } else if (getMachine()->getMachineState() == ASSISTANCE) {
+        getTask()->stateTransition(new AssistanceState());
+    }
 }
 
 void ReadyState::updateSelections() {

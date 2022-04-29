@@ -66,3 +66,15 @@ bool MachineImpl::getAndUpdateSugarLevel() {
     }
     return false;
 }
+
+MachineState MachineImpl::getMachineState() {
+    return currentState;
+}
+
+void MachineImpl::setMachineState(MachineState nextState) {
+    currentState = nextState;
+}
+
+bool MachineImpl::isMaking() {
+    return makeButton->isPressed() || making;
+}

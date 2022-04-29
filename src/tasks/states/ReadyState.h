@@ -9,7 +9,7 @@ private:
     void updateSelections();
     void dispaySelectedProduct();
     void displayReadyMessage();
-    // check interrupt T_idle
+    void checkTransitions();
 
 public:
     void handle();
