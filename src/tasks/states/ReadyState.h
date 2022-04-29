@@ -8,6 +8,8 @@ class ReadyState : public State {
 private:
     void dispaySelectedProduct();
     void displayReadyMessage();
+    void updateProductSelection();
+    void updateSugarLevel();
     // check interrupt T_idle
 
 public:

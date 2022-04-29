@@ -13,6 +13,14 @@ private:
     Product* selectedProduct;
     int sugarLevel;
     Product* getPointerToCurrentSelectedProduct();
+    Button* upButton;
+    Button* downButton;
+    Button* makeButton;
+    Potentiometer* potentiometer;
+    Display* display;
+    ServoMotor* servoMotor;
+    TemperatureSensor* temperatureSensor;
+    Ultrasonic* ultrasonic;
 
 public:
     MachineImpl(const int productsQuantity);
@@ -20,7 +28,14 @@ public:
     void selectPreviousProduct() override;
     void updateSugarLevel(const int amount) override;
     String getInfoSelection() override;
-
+    Button* getUpButton();
+    Button* getDownButton();
+    Button* getMakeButton();
+    Potentiometer* getPotentiometer();
+    Display* getDisplay();
+    ServoMotor* getServoMotor();
+    TemperatureSensor* getTemperatureSensor();
+    Ultrasonic* getUltrasonic();
 };
 
 #endif

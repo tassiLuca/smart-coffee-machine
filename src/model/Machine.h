@@ -1,6 +1,7 @@
 #ifndef __MACHINE__
 #define __MACHINE__
 
+#include "../boundary/CoffeeMachineFactory.h"
 #include "Product.h"
 
 /**
@@ -33,6 +34,15 @@ public:
      * @return String containing the product selected and the sugar level. 
      */
     virtual String getInfoSelection() = 0;
+
+    virtual Button* getUpButton() = 0;
+    virtual Button* getDownButton() = 0;
+    virtual Button* getMakeButton() = 0;
+    virtual Potentiometer* getPotentiometer() = 0;
+    virtual Display* getDisplay() = 0;
+    virtual ServoMotor* getServoMotor() = 0;
+    virtual TemperatureSensor* getTemperatureSensor() = 0;
+    virtual Ultrasonic* getUltrasonic() = 0;
 
 };
 

@@ -6,7 +6,7 @@
 
 void InitState::handle() {
     static unsigned long enteredTime = 0;
-    boundary->getDisplay()->print("Welcome");
+    model->getDisplay()->print("Welcome");
     if (millis() - enteredTime > STATE_DURATION) {
         getTask()->stateTransition(new ReadyState());
     }

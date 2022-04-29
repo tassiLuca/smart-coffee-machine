@@ -3,7 +3,6 @@
 
 #include "../Task.h"
 
-#include "../../boundary/CoffeeMachine.h"
 #include "../../model/MachineImpl.h"
 
 class Task;
@@ -21,13 +20,11 @@ private:
 
 protected:
     Machine* model;
-    CoffeeMachine* boundary;
 
 public:
 
     State() {
         model = new MachineImpl(10);
-        boundary = new CoffeeMachine();
     }
 
     virtual ~State() {}
