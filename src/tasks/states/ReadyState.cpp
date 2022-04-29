@@ -5,7 +5,7 @@
 #include "AssistanceState.h"
 
 #define PRODUCT_SELECTION_DURATION 5000
-#define IDLE_TIMEOUT 10000
+#define IDLE_TIMEOUT 60000
 
 void ReadyState::handle() {
     getMachine()->setMachineState(READY);
