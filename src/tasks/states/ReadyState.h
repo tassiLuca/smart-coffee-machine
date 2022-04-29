@@ -6,12 +6,14 @@
 class ReadyState : public State {
 
 private:
+    unsigned long lastInteraction;
     void updateSelections();
     void dispaySelectedProduct();
     void displayReadyMessage();
     void checkTransitions();
 
 public:
+    ReadyState();
     void handle();
 
 };

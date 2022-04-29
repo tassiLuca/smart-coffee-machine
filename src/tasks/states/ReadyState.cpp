@@ -5,7 +5,11 @@
 #include "AssistanceState.h"
 
 #define PRODUCT_SELECTION_DURATION 5000
-#define IDLE_TIMEOUT 60000
+#define IDLE_TIMEOUT 10000
+
+ReadyState::ReadyState() {
+    lastInteraction = millis();
+}
 
 void ReadyState::handle() {
     getMachine()->setMachineState(READY);
@@ -14,8 +18,7 @@ void ReadyState::handle() {
 }
 
 void ReadyState::checkTransitions() {
-    static unsigned long enteredTime = millis();
-    if (millis() - enteredTime > IDLE_TIMEOUT) {
+    if (millis() - lastInteraction > IDLE_TIMEOUT) {
         getTask()->stateTransition(new SleepState());
     } else if (getMachine()->isMaking()) {
         getTask()->stateTransition(new MakingState());
@@ -30,6 +33,7 @@ void ReadyState::updateSelections() {
     bool changedSugar = getMachine()->getAndUpdateSugarLevel();
     if (changedSelection || changedSugar) {
         lastSelectionTimestamp = millis();
+        lastInteraction = millis();
     }
     if (millis() - lastSelectionTimestamp < PRODUCT_SELECTION_DURATION) {
         dispaySelectedProduct();
