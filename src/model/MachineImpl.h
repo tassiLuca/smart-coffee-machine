@@ -18,8 +18,9 @@ public:
     MachineImpl(const int productsQuantity);
     void selectNextProduct();
     void selectPreviousProduct();
-    void addSugarLevel();
-    void decreaseSugarLevel();
+    Product* getSelectedProduct();
+    void updateSugarLevel(const int amount);
+    int getSugarLevel();
 
 };
 

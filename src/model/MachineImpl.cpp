@@ -32,12 +32,16 @@ void MachineImpl::selectPreviousProduct() {
     selectedProduct = (tmp == products.front() ? products.back() : (tmp - 1));
 }
 
-void MachineImpl::addSugarLevel() {
+void MachineImpl::updateSugarLevel(const int amount) {
     sugarLevel += 1;
 }
 
-void MachineImpl::decreaseSugarLevel() {
-    sugarLevel -= 1;
+Product* MachineImpl::getSelectedProduct() {
+    return selectedProduct;
+}
+
+int MachineImpl::getSugarLevel() {
+    return sugarLevel;
 }
 
 // void MachineImpl::displayMessage(String msg) {

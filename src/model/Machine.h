@@ -24,14 +24,17 @@ public:
     virtual void selectPreviousProduct() = 0;
 
     /**
-     * @brief Increment the sugar level by one unit.
+     * @brief Gets the selected product.
+     * @return Product* 
      */
-    virtual void addSugarLevel() = 0;
+    virtual Product* getSelectedProduct() = 0;
 
     /**
-     * @brief Decrease the sugar level by one unit. 
+     * @brief Update the sugar level.
      */
-    virtual void decreaseSugarLevel() = 0;
+    virtual void updateSugarLevel(const int amount) = 0;
+
+    virtual int getSugarLevel() = 0;
 
 };
 
