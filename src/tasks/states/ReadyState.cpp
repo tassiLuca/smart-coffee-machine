@@ -8,8 +8,9 @@
 #define IDLE_TIMEOUT 10000
 
 void ReadyState::handle() {
-    checkTransitions();
+    getMachine()->setMachineState(READY);
     updateSelections();
+    checkTransitions();
 }
 
 void ReadyState::checkTransitions() {

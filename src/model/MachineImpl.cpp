@@ -78,3 +78,7 @@ void MachineImpl::setMachineState(MachineState nextState) {
 bool MachineImpl::isMaking() {
     return makeButton->isPressed() || making;
 }
+
+void MachineImpl::make() {
+    Serial.println("Stepper moves");
+}

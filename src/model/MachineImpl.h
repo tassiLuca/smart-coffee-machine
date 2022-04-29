@@ -30,6 +30,7 @@ public:
     bool getAndUpdateSugarLevel();
     bool getAndUpdateSelectedProduct();
     bool isMaking();
+    void make();
     void displayMessage(String msg);
     void displaySelections();
     MachineState getMachineState();
