@@ -1,7 +1,5 @@
 #include <Arduino.h>
 #include "ReadyState.h"
-#include "MakingState.h"
-#include "SleepState.h"
 
 #define PRODUCT_SELECTION_DURATION 5000
 #define TIMEOUT_IDLE 20000
