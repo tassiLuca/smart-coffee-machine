@@ -17,6 +17,7 @@ MachineImpl::MachineImpl(const int productsQuantity) {
     pot = f->createPotentiometer(POTENTIOMETER_PIN);
     servoMotor = f->createServoMotor(SERVO_MOTOR_PIN);
     servoMotor->on();
+    sonarSensor = f->createUltrasonic(SONAR_TRIGGER_PIN, SONAR_ECHO_PIN);
     // products
     products.push_back(new ProductImpl("Coffee", productsQuantity));
     products.push_back(new ProductImpl("Tea", productsQuantity));
@@ -84,12 +85,32 @@ bool MachineImpl::isMaking() {
 void MachineImpl::make() {
     static int angle = 0;
     if (angle == 0) {
-        displayMessage("Making coffee");
+        displayMessage("Making " + String(selectedProduct->toString()));
     }
     making = true;
-    servoMotor->setPosition(angle++);
+    servoMotor->setPosition(angle);
+    angle += 2;
     if (angle == 180) {
+        displayMessage("The " + String(selectedProduct->toString()) + " ready");
         angle = 0;
         making = false;
+        // selectedProduct->consume()
     }
+}
+
+int MachineImpl::getDistance() {
+    return sonarSensor->getDistance();
+}
+
+bool MachineImpl::productsAvailable() {
+    int totalNumOfProducts = 0;
+    std::list<Product*>::iterator product;
+    for (product = products.begin(); product != products.end(); product++) {
+        totalNumOfProducts += (*product)->getLeftQuantity();
+    }
+    return totalNumOfProducts > 0;
+}
+
+void MachineImpl::test() {
+
 }

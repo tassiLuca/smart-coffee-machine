@@ -1,10 +1,9 @@
 #include "DispensingState.h"
-#include "IdleState.h"
+#include "CompletedState.h"
 
 void DispensingState::handle() {
     getMachine()->make();
     if (!getMachine()->isMaking()) {
-        getMachine()->setMachineState(READY);
-        getTask()->stateTransition(new IdleState());
+        getTask()->stateTransition(new CompletedState());
     }
 }

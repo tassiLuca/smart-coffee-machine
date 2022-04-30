@@ -23,6 +23,7 @@ private:
     Button* makeButton;
     Potentiometer* pot;
     ServoMotor* servoMotor;
+    Ultrasonic* sonarSensor;
     // methods
     std::list<Product*>::iterator getRefToCurrentSelectedProduct();
 
@@ -36,6 +37,9 @@ public:
     void displaySelections();
     MachineState getMachineState();
     void setMachineState(MachineState nextState);
+    int getDistance();
+    bool productsAvailable();
+    void test();
 
 };
 

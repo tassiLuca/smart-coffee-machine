@@ -17,6 +17,9 @@ public:
     virtual void displaySelections() = 0;
     virtual MachineState getMachineState() = 0;
     virtual void setMachineState(MachineState nextState) = 0;
+    virtual int getDistance() = 0;
+    virtual bool productsAvailable() = 0;
+    virtual void test() = 0;
 
 };
 
