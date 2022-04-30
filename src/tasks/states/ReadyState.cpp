@@ -12,7 +12,6 @@ ReadyState::ReadyState() {
 }
 
 void ReadyState::handle() {
-    getMachine()->setMachineState(READY);
     updateSelections();
     checkTransitions();
 }

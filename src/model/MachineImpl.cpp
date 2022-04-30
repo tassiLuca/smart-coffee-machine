@@ -83,6 +83,9 @@ bool MachineImpl::isMaking() {
 
 void MachineImpl::make() {
     static int angle = 0;
+    if (angle == 0) {
+        displayMessage("Making coffee");
+    }
     making = true;
     servoMotor->setPosition(angle++);
     if (angle == 180) {

@@ -13,8 +13,8 @@ void setup() {
     machine = new MachineImpl(10);
     scheduler = new Scheduler(50);
     // Creates all the tasks
-    Task* t = new MainTask(150, machine);
-    Task* t2 = new DispensingTask(50, machine);
+    Task* t = new MainTask(100, machine);
+    Task* t2 = new DispensingTask(100, machine);
     scheduler->addTask(t);
     scheduler->addTask(t2);
 }
