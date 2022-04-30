@@ -4,6 +4,11 @@
 #include "SleepState.h"
 #include "AssistanceState.h"
 
+/**
+ * @todo gestione prodotto finito - non selezionabile. 
+ * @todo condizione di guardia per sleep -> aggiungere pir
+ */
+
 #define PRODUCT_SELECTION_DURATION 5000
 #define IDLE_TIMEOUT 60000
 

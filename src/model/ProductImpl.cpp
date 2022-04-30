@@ -4,6 +4,12 @@ ProductImpl::ProductImpl(const String name, const int maxQuantity)
     : quantity(maxQuantity)
     , productName(name) { }
 
+void ProductImpl::decrementQuantity() {
+    if (quantity > 0) {
+        quantity -= 1;
+    }
+}
+
 int ProductImpl::getLeftQuantity() {
     return quantity;
 }

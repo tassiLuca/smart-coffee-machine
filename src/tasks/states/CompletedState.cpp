@@ -3,6 +3,10 @@
 
 #define TIMEOUT_COMPLETED 10000
 
+/**
+ * @todo reset posizione servo 
+ */
+
 CompletedState::CompletedState() {
     enteredTime = millis();
 }

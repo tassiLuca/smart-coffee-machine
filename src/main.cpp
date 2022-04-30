@@ -10,7 +10,7 @@ Machine* machine;
 
 void setup() {
     Serial.begin(9600); // TODO
-    machine = new MachineImpl(10);
+    machine = new MachineImpl(2);
     scheduler = new Scheduler(50);
     // Creates all the tasks
     Task* t = new MainTask(100, machine);

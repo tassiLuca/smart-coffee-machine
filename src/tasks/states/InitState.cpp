@@ -2,7 +2,7 @@
 #include "InitState.h"
 #include "ReadyState.h"
 
-#define STATE_DURATION 3000
+#define STATE_DURATION 2000
 
 void InitState::handle() {
     static unsigned long enteredTime = millis();

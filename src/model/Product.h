@@ -6,6 +6,7 @@
 class Product {
 
 public:
+    virtual void decrementQuantity() = 0;
     virtual int getLeftQuantity() = 0;
     virtual bool isAvailable() = 0;
     virtual String toString() = 0;

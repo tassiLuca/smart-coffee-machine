@@ -94,7 +94,7 @@ void MachineImpl::make() {
         displayMessage("The " + String(selectedProduct->toString()) + " ready");
         angle = 0;
         making = false;
-        // selectedProduct->consume()
+        selectedProduct->decrementQuantity();
     }
 }
 
