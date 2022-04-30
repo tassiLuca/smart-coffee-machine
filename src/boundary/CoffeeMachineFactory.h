@@ -1,12 +1,12 @@
 #ifndef __COFFEE_MACHINE_FACTORY__
 #define __COFFEE_MACHINE_FACTORY__
 
-#include "Button.h"
-#include "Potentiometer.h"
-#include "Display.h"
-#include "ServoMotor.h"
-#include "TemperatureSensor.h"
-#include "Ultrasonic.h"
+#include "button/Button.h"
+#include "potentiometer/Potentiometer.h"
+#include "display/Display.h"
+#include "servo/ServoMotor.h"
+#include "temperature/TemperatureSensor.h"
+#include "ultrasonic/Ultrasonic.h"
 
 /**
  * @brief The abstract factory interface which exposes methods 

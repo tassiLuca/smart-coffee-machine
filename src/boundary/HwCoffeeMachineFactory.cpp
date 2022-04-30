@@ -1,11 +1,11 @@
 #include "HwCoffeeMachineFactory.h"
 
-#include "ButtonImpl.h"
-#include "PotentiometerImpl.h"
-#include "DisplayImpl.h"
-#include "ServoMotorImpl.h"
-#include "TemperatureSensorImpl.h"
-#include "UltrasonicImpl.h"
+#include "button/ButtonImpl.h"
+#include "potentiometer/PotentiometerImpl.h"
+#include "display/DisplayImpl.h"
+#include "servo/ServoMotorImpl.h"
+#include "temperature/TemperatureSensorImpl.h"
+#include "ultrasonic/UltrasonicImpl.h"
 
 Button* HwCoffeMachineFactory::createButton(const int buttonPin) const {
     return new ButtonImpl(buttonPin);
