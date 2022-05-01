@@ -6,7 +6,6 @@
 
 /**
  * @todo gestione prodotto finito - non selezionabile. 
- * @todo condizione di guardia per sleep -> aggiungere pir
  */
 
 #define PRODUCT_SELECTION_DURATION 5000
@@ -22,7 +21,7 @@ void ReadyState::handle() {
 }
 
 void ReadyState::checkTransitions() {
-    if (millis() - lastInteraction > IDLE_TIMEOUT) {
+    if (millis() - lastInteraction > IDLE_TIMEOUT && !getMachine()->detectingSomeone()) {
         getTask()->stateTransition(new SleepState());
     } else if (getMachine()->isMaking()) {
         getMachine()->setMachineState(DISPENSING);

@@ -24,6 +24,7 @@ private:
     Potentiometer* pot;
     ServoMotor* servoMotor;
     Ultrasonic* sonarSensor;
+    MovementDetector* pirSensor;
     // methods
     std::list<Product*>::iterator getRefToCurrentSelectedProduct();
 
@@ -38,6 +39,7 @@ public:
     MachineState getMachineState();
     void setMachineState(MachineState nextState);
     int getDistance();
+    bool detectingSomeone();
     bool productsAvailable();
     void test();
 

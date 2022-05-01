@@ -7,6 +7,7 @@
 #include "servo/ServoMotor.h"
 #include "temperature/TemperatureSensor.h"
 #include "ultrasonic/Ultrasonic.h"
+#include "movement/MovementDetector.h"
 
 /**
  * @brief The abstract factory interface which exposes methods 
@@ -54,15 +55,18 @@ public:
 
     /**
      * @brief Creates a new ultrasonic object. 
-     * @param triggerPin the pin phsysically attached to the trigger pin
+     * @param triggerPin the pin physically attached to the trigger pin
      * @param echoPin the pin physically attached to the echo pin
      * @return Ultrasonic* a pointer to the new ultrasonic sensor.
      */
     virtual Ultrasonic* createUltrasonic(const int triggerPin, const int echoPin) const = 0;
 
     /**
-     * @todo createPirSensor() 
+     * @brief Creates a new movement detector object. 
+     * @param PirSensorPin the pin physically attached to the pir sensor pin.
+     * @return MovementDetector* a pointer to the new pir sensor.
      */
+    virtual MovementDetector* createPirSensor(const int pirSensorPin) const = 0;
 
 };
 

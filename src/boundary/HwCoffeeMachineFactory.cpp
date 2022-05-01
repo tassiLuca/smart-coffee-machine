@@ -6,6 +6,7 @@
 #include "servo/ServoMotorImpl.h"
 #include "temperature/TemperatureSensorImpl.h"
 #include "ultrasonic/UltrasonicImpl.h"
+#include "movement/PirSensor.h"
 
 Button* HwCoffeMachineFactory::createButton(const int buttonPin) const {
     return new ButtonImpl(buttonPin);
@@ -31,6 +32,6 @@ Ultrasonic* HwCoffeMachineFactory::createUltrasonic(const int triggerPin, const 
     return new UltrasonicImpl(triggerPin, echoPin);
 }
 
-/**
- * @todo createPirSensor() 
- */
+MovementDetector* HwCoffeMachineFactory::createPirSensor(const int pirSensorPin) const {
+    return new PirSensor(pirSensorPin);
+}

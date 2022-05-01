@@ -7,6 +7,10 @@
 #define DEFAULT_SUGAR 1
 #define MAX_SUGAR_LEVEL 5
 
+void detection() {
+    Serial.println("PIR DETECTION");
+}
+
 MachineImpl::MachineImpl(const int productsQuantity) {
     // sensors and actuators
     CoffeeMachineFactory* f = new HwCoffeMachineFactory();
@@ -18,6 +22,9 @@ MachineImpl::MachineImpl(const int productsQuantity) {
     servoMotor = f->createServoMotor(SERVO_MOTOR_PIN);
     servoMotor->on();
     sonarSensor = f->createUltrasonic(SONAR_TRIGGER_PIN, SONAR_ECHO_PIN);
+    pirSensor = f->createPirSensor(PIR_SENSOR);
+    pirSensor->calibrate();
+    pirSensor->attachInterruptOnDetection(detection);
     // products
     products.push_back(new ProductImpl("Coffee", productsQuantity));
     products.push_back(new ProductImpl("Tea", productsQuantity));
@@ -113,4 +120,8 @@ bool MachineImpl::productsAvailable() {
 
 void MachineImpl::test() {
 
+}
+
+bool MachineImpl::detectingSomeone() {
+    return pirSensor->isMovementDetected();
 }

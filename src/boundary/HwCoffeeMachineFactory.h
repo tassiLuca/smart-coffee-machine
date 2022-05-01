@@ -19,9 +19,7 @@ public:
 
     Ultrasonic* createUltrasonic(const int triggerPin, const int echoPin) const override;
 
-    /**
-     * @todo createPirSensor() 
-     */
+    MovementDetector* createPirSensor(const int pirSensorPin) const override;
 
 };
 

@@ -2,9 +2,9 @@
 #define __SETUP__
 
 // Button pins.
-#define UP_BTN   2
-#define DOWN_BTN 3
-#define MAKE_BTN 4
+#define UP_BTN   3
+#define DOWN_BTN 4
+#define MAKE_BTN 5
 
 // Sonar sensor pins.
 #define SONAR_TRIGGER_PIN 8
@@ -31,5 +31,8 @@
 // Servo motor.
 #define SERVO_MOTOR_PIN 11
 
+// Pir sensor: keep in mind this pin must support interrupts.
+// Actually, all pins can support interrupt with EnableInterrupt library.
+#define PIR_SENSOR 2
 
 #endif

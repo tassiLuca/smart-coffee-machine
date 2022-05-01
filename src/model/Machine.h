@@ -20,6 +20,7 @@ public:
     virtual int getDistance() = 0;
     virtual bool productsAvailable() = 0;
     virtual void test() = 0;
+    virtual bool detectingSomeone() = 0;
 
 };
 
