@@ -3,6 +3,7 @@
 #include "scheduler/Scheduler.h"
 #include "tasks/MainTask.h"
 #include "tasks/DispensingTask.h"
+#include "tasks/SelfTestingTask.h"
 #include "model/MachineImpl.h"
 
 Scheduler* scheduler;
@@ -15,8 +16,10 @@ void setup() {
     // Creates all the tasks
     Task* t = new MainTask(100, machine);
     Task* t2 = new DispensingTask(50, machine);
+    Task* t3 = new SelfTestingTask(500, machine);
     scheduler->addTask(t);
     scheduler->addTask(t2);
+    scheduler->addTask(t3);
 }
 
 void loop() {

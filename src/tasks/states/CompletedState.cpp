@@ -13,6 +13,7 @@ CompletedState::CompletedState() {
 
 void CompletedState::handle() {
     if (checkTransition()) {
+        
         if (getMachine()->productsAvailable()) {
             getMachine()->setMachineState(READY);
         } else {
