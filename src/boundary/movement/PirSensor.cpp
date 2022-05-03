@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "PirSensor.h"
 
-#define CALIBRATION_TIME 20000
+#define CALIBRATION_TIME 10000
 
 PirSensor::PirSensor(const int pirSensorPin) {
     pin = pirSensorPin;

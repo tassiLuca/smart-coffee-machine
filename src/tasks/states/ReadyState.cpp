@@ -21,9 +21,10 @@ void ReadyState::handle() {
 }
 
 void ReadyState::checkTransitions() {
-    if (millis() - lastInteraction > IDLE_TIMEOUT && !getMachine()->detectingSomeone()) {
+    if (millis() - lastInteraction > IDLE_TIMEOUT && 
+        !getMachine()->detectingSomeone() && getMachine()->getMachineState() == READY) {
         getTask()->stateTransition(new SleepState());
-    } else if (getMachine()->isMaking()) {
+    } else if (getMachine()->isMaking() && getMachine()->getMachineState() == READY) {
         getMachine()->setMachineState(DISPENSING);
         getTask()->stateTransition(new MakingState());
     } else if (getMachine()->getMachineState() == ASSISTANCE) {

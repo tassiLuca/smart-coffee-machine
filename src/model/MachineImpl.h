@@ -16,6 +16,7 @@ private:
     Product* selectedProduct;
     MachineState currentState = READY;
     bool making = false;
+    bool testing = false;
     // sensors
     Display* display;
     Button* upButton;
@@ -25,8 +26,10 @@ private:
     ServoMotor* servoMotor;
     Ultrasonic* sonarSensor;
     MovementDetector* pirSensor;
+    TemperatureSensor* temperatureSensor;
     // methods
     std::list<Product*>::iterator getRefToCurrentSelectedProduct();
+    void moveServo();
 
 public:
     MachineImpl(const int productsQuantity);
@@ -39,8 +42,10 @@ public:
     MachineState getMachineState();
     void setMachineState(MachineState nextState);
     int getDistance();
+    float getTemperature();
     bool detectingSomeone();
     bool productsAvailable();
+    bool isTesting();
     void test();
 
 };

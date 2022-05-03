@@ -1,7 +1,15 @@
 #include "NormalState.h"
+#include "SelfTestState.h"
 
-#define CHECK_TIME 180000
+#define CHECK_TIME 20000
+
+NormalState::NormalState() {
+    enteredTime = millis();
+}
 
 void NormalState::handle() {
-    Serial.println("NORMAL STATE");
+    if (millis() - enteredTime > CHECK_TIME && getMachine()->getMachineState() == READY) {
+        getMachine()->setMachineState(TESTING);
+        getTask()->stateTransition(new SelfTestState());
+    }
 }

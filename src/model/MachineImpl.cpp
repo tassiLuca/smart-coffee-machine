@@ -25,6 +25,7 @@ MachineImpl::MachineImpl(const int productsQuantity) {
     pirSensor = f->createPirSensor(PIR_SENSOR);
     pirSensor->calibrate();
     pirSensor->attachInterruptOnDetection(detection);
+    temperatureSensor = f->createTemperatureSensor(TEMPERATURE_SENSOR_PIN);
     // products
     products.push_back(new ProductImpl("Coffee", productsQuantity));
     products.push_back(new ProductImpl("Tea", productsQuantity));
@@ -95,8 +96,7 @@ void MachineImpl::make() {
         displayMessage("Making " + String(selectedProduct->toString()));
     }
     making = true;
-    servoMotor->setPosition(angle);
-    angle += 2;
+    servoMotor->setPosition(angle++);
     if (angle == 180) {
         displayMessage("The " + String(selectedProduct->toString()) + " ready");
         angle = 0;
@@ -119,7 +119,23 @@ bool MachineImpl::productsAvailable() {
 }
 
 void MachineImpl::test() {
+    static int angle = 0;
+    testing = true;
+    servoMotor->setPosition(angle);
+    angle += 5;
+    if (angle == 180) {
+        testing = false;
+        angle = 0;
+        servoMotor->setPosition(angle);
+    }
+}
 
+float MachineImpl::getTemperature() {
+    return temperatureSensor->getTemperature();
+}
+
+bool MachineImpl::isTesting() {
+    return testing;
 }
 
 bool MachineImpl::detectingSomeone() {

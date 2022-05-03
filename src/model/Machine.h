@@ -3,7 +3,7 @@
 
 #include "Product.h"
 
-enum MachineState { READY, DISPENSING, ASSISTANCE };
+enum MachineState { READY, DISPENSING, ASSISTANCE, TESTING };
 
 class Machine 
 {
@@ -18,7 +18,9 @@ public:
     virtual MachineState getMachineState() = 0;
     virtual void setMachineState(MachineState nextState) = 0;
     virtual int getDistance() = 0;
+    virtual float getTemperature() = 0;
     virtual bool productsAvailable() = 0;
+    virtual bool isTesting() = 0;
     virtual void test() = 0;
     virtual bool detectingSomeone() = 0;
 

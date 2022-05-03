@@ -5,7 +5,11 @@
 
 class NormalState : public State {
 
+private:
+    unsigned long enteredTime;
+
 public:
+    NormalState();
     void handle();
 
 };
