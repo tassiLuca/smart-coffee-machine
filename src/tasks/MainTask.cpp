@@ -1,13 +1,8 @@
-#include <Arduino.h>
 #include "MainTask.h"
+#include "states/InitState.h"
 
-
-
-MainTask::MainTask(const int period)
-    : Task(period)
+MainTask::MainTask(const int period, Machine* machine) 
+    : BaseTask(period, machine) 
 {
-}
-
-void MainTask::tick() 
-{
+    this->init(new InitState());
 }

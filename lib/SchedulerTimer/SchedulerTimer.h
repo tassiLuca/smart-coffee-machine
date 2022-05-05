@@ -1,10 +1,10 @@
 #ifndef __TIMER__
 #define __TIMER__
 
-class Timer {
+class SchedulerTimer {
     
 public:  
-    Timer();
+    SchedulerTimer();
     void setupFreq(int freq);  
     /* period in ms */
     void setupPeriod(int period);  

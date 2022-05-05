@@ -7,6 +7,7 @@ class ButtonImpl: public Button {
 
 private:
     int pin;
+    unsigned long lastDebounceTime;
 
 public:
     ButtonImpl(const int buttonPin);

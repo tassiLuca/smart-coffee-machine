@@ -2,52 +2,79 @@
 
 class Scheduler {
     - basePeriod: int 
-    - numOfTasks: int
-    - tasks: map<Task*, int>
+    - tasks: list<Task*>
     - timer: Timer
     - elapsedTime: int
-    - updateAndCheckTime(basePeriod: int): bool
-    + init(basePeriod: int)
+    + Scheduler(basePeriod: int)
     + addTask(task:Task*): bool
     + schedule()
 }
 
-class Timer {
-    + setupFreq(freq: int)
-    + setupPeriod(perido: int)
-    + waitForNextTick()
+interface Task {
+    + init(state: State*)
+    + stateTransition(nextState: State*)
+    + execute()
+    + updateAndCheckTime(basePeriod: int): bool
+    + getMachine(): Machine*
 }
 
-Scheduler *-up- Timer
+Scheduler "1" *-right-> "*" Task
 
-abstract class Task {
+abstract class BaseTask {
     - myPeriod: int
+    - elapsedTime: int
+    - currentState: State*
+    - machine: Machine*
     - actualState: State*
-    + init(period: int)
-    + changeState(nextState: State*)
-    + {abstract} tick()
+    + Task(period: int)
+    + init(state: State*)
+    + stateTransition(nextState: State*)
+    + execute()
+    + updateAndCheckTime(basePeriod: int): bool
+    + getMachine(): Machine*
 }
 
-Scheduler *-right- Task
+Task <|-- BaseTask
 
 class MainTask 
-Task <|-- MainTask
+BaseTask <|-- MainTask
 
 class DispensingTask
-Task <|-- DispensingTask
+BaseTask <|-- DispensingTask
 
 class SelfTestingTask
-Task <|-- SelfTestingTask
+BaseTask <|-- SelfTestingTask
 
 abstract class State {
     - task: Task*
     + setTask(task: Task*)
     + getTask(): Task*
-    + {abstract} do()
-    + {abstract} nextState(): State
+    + {abstract} handle()
 }
 
-Task o-right- State
+Task o-right-> State
+State o-left-> Task
+
+class InitState { }
+class ReadyState { }
+
+State <|-- InitState
+State <|-- ReadyState
+
+MainTask -[dashed]right-> InitState : uses
+MainTask -[dashed]left-> ReadyState : uses
+
+
+interface Machine {
+    + getSelectedProduct() : Product*
+    + selectProduct(product: Product*)
+    + displayMessage(msg: String)
+    + make()
+    + isDispensing(): bool
+    + isAvailable(): bool
+}
+
+Machine --o Task
 
 
 @enduml
