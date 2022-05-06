@@ -1,5 +1,5 @@
 #include "MainTask.h"
-#include "states/InitState.h"
+#include "InitState.h"
 
 MainTask::MainTask(const int period, Machine* machine) 
     : BaseTask(period, machine) 

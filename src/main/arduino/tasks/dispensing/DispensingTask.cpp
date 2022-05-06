@@ -1,5 +1,5 @@
 #include "DispensingTask.h"
-#include "states/IdleState.h"
+#include "IdleState.h"
 
 DispensingTask::DispensingTask(const int period, Machine* machine) 
     : BaseTask(period, machine)

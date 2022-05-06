@@ -1,7 +1,7 @@
 #ifndef __MAIN_TASK__
 #define __MAIN_TASK__
 
-#include "BaseTask.h"
+#include "../BaseTask.h"
 
 class MainTask: public BaseTask 
 {

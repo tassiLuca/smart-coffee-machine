@@ -1,7 +1,7 @@
 #ifndef __SELF_TESTING_TASK__
 #define __SELF_TESTING_TASK__
 
-#include "BaseTask.h"
+#include "../BaseTask.h"
 
 class SelfTestingTask : public BaseTask {
 

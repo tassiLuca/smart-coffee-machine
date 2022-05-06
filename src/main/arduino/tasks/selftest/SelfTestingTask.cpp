@@ -1,5 +1,5 @@
 #include "SelfTestingTask.h"
-#include "states/NormalState.h"
+#include "NormalState.h"
 
 SelfTestingTask::SelfTestingTask(const int period, Machine* machine) 
     : BaseTask(period, machine) 
