@@ -13,10 +13,12 @@ private:
     // variables
     std::list<Product*> products;
     int sugarLevel;
+    int selfTests = 0;
     Product* selectedProduct;
     MachineState currentState = READY;
     bool making = false;
     bool testing = false;
+    StaticJsonDocument<100> doc;
     // sensors
     Display* display;
     Button* upButton;
@@ -47,6 +49,7 @@ public:
     bool productsAvailable();
     bool isTesting();
     void test();
+    JsonDocument& getInfos();
 
 };
 

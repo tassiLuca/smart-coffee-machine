@@ -1,6 +1,7 @@
 #ifndef __MACHINE__
 #define __MACHINE__
 
+#include <ArduinoJson.h>
 #include "Product.h"
 
 enum MachineState { READY, DISPENSING, ASSISTANCE, TESTING };
@@ -23,6 +24,7 @@ public:
     virtual bool isTesting() = 0;
     virtual void test() = 0;
     virtual bool detectingSomeone() = 0;
+    virtual JsonDocument& getInfos() = 0;
 
 };
 

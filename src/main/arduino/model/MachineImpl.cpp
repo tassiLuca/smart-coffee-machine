@@ -124,6 +124,7 @@ void MachineImpl::test() {
     servoMotor->setPosition(angle);
     angle += 5;
     if (angle == 180) {
+        selfTests++;
         testing = false;
         angle = 0;
         servoMotor->setPosition(angle);
@@ -141,3 +142,14 @@ bool MachineImpl::isTesting() {
 bool MachineImpl::detectingSomeone() {
     return pirSensor->isMovementDetected();
 }
+
+JsonDocument& MachineImpl::getInfos() {
+    doc.clear();
+    doc["status"] = getMachineState();
+    doc["tests"] = selfTests;
+    std::list<Product*>::iterator product;
+    for (product = products.begin(); product != products.end(); product++) {
+        doc[(*product)->toString()] = (*product)->getLeftQuantity();
+    }
+    return doc;
+};

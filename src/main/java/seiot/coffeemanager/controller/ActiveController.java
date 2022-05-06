@@ -28,8 +28,9 @@ public class ActiveController extends Thread {
     }
 
     public void extractInfos(String info) {
-        String status = Integer.toString(JsonPath.read(info, "$.status"));
-        this.view.displayMachineStatus(status);
+        System.out.println(info);
+        //String status = Integer.toString(JsonPath.read(info, "$.status"));
+        //this.view.displayMachineStatus(status);
     }
 
 }

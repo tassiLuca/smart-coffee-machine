@@ -3,7 +3,5 @@
 #include "SendRecState.h"
 
 void SendRecState::handle() {
-    StaticJsonDocument<100> doc;
-    doc["status"] = getMachine()->getMachineState();
-    MsgService.sendMsg(doc);
+    MsgService.sendMsg(getMachine()->getInfos());
 }
