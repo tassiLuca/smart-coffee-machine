@@ -38,8 +38,8 @@ void MsgServiceClass::sendMsg(const Msg& msg){
 }
 
 void MsgServiceClass::sendMsg(const JsonDocument& doc) {
-    Serial.println("stats");
     serializeJson(doc, Serial);
+    Serial.println();
 }
 
 void serialEvent() {
