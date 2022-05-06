@@ -11,10 +11,10 @@ private:
 
 public:
     ProductImpl(const String name, const int maxQuantity);
-    void decrementQuantity();
-    int getLeftQuantity();
-    bool isAvailable();
-    String toString();
+    void consume() override;
+    int getLeftQuantity() override;
+    bool isAvailable() override;
+    String toString() override;
 
 };
 

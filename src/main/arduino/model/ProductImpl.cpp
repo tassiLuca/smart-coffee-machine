@@ -4,7 +4,7 @@ ProductImpl::ProductImpl(const String name, const int maxQuantity)
     : quantity(maxQuantity)
     , productName(name) { }
 
-void ProductImpl::decrementQuantity() {
+void ProductImpl::consume() {
     if (quantity > 0) {
         quantity -= 1;
     }
