@@ -34,8 +34,8 @@ void ReadyState::checkTransitions() {
 
 void ReadyState::updateSelections() {
     static unsigned long lastSelectionTimestamp = 0;
-    bool changedSelection = getMachine()->getAndUpdateSelectedProduct();
-    bool changedSugar = getMachine()->getAndUpdateSugarLevel();
+    bool changedSelection = getMachine()->updateSelectedProduct();
+    bool changedSugar = getMachine()->updateSugarLevel();
     if (changedSelection || changedSugar) {
         lastSelectionTimestamp = millis();
         lastInteraction = millis();

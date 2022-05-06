@@ -35,21 +35,21 @@ private:
 
 public:
     MachineImpl(const int productsQuantity);
-    bool getAndUpdateSugarLevel();
-    bool getAndUpdateSelectedProduct();
-    bool isMaking();
-    void make();
-    void displayMessage(String msg);
-    void displaySelections();
-    MachineState getMachineState();
-    void setMachineState(MachineState nextState);
-    int getDistance();
-    float getTemperature();
-    bool detectingSomeone();
-    bool productsAvailable();
-    bool isTesting();
-    void test();
-    JsonDocument& getInfos();
+    bool updateSugarLevel() override;
+    bool updateSelectedProduct() override;
+    bool productsAvailable() override;
+    void displaySelections() override;
+    void displayMessage(String msg) override;
+    void make() override;
+    bool isMaking() override;
+    void test() override;
+    bool isTesting() override;
+    int getDistance() override;
+    float getTemperature() override;
+    bool detectingSomeone() override;
+    void setMachineState(MachineState nextState) override;
+    MachineState getMachineState() override;
+    JsonDocument& getInfos() override;
 
 };
 

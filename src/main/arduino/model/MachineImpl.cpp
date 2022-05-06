@@ -47,7 +47,7 @@ void MachineImpl::displayMessage(String msg) {
     display->print(msg);
 }
 
-bool MachineImpl::getAndUpdateSelectedProduct() {
+bool MachineImpl::updateSelectedProduct() {
     if (upButton->isPressed()) {
         auto tmp = getRefToCurrentSelectedProduct();
         selectedProduct = (*tmp == products.front() ? products.back() : *(--tmp));
@@ -69,7 +69,7 @@ std::list<Product*>::iterator MachineImpl::getRefToCurrentSelectedProduct() {
     }
 }
 
-bool MachineImpl::getAndUpdateSugarLevel() {
+bool MachineImpl::updateSugarLevel() {
     int newSugarLevel = map(pot->getValue(), 0, 1024, DEFAULT_SUGAR, MAX_SUGAR_LEVEL + 1);
     if (sugarLevel != newSugarLevel) {
         sugarLevel = newSugarLevel;
@@ -101,7 +101,7 @@ void MachineImpl::make() {
         displayMessage("The " + String(selectedProduct->toString()) + " ready");
         angle = 0;
         making = false;
-        selectedProduct->decrementQuantity();
+        selectedProduct->consume();
     }
 }
 
