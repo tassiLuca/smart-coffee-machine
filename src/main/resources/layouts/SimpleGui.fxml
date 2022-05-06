@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seiot.coffeemanager.view.ManagerViewController">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Smart Coffee Machine Manager" textAlignment="CENTER" wrappingWidth="317.21630859375" BorderPane.alignment="CENTER">
          <font>
@@ -29,12 +29,12 @@
    <bottom>
       <HBox prefHeight="90.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <Button minWidth="100.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="1000.0" style="-fx-border-radius: 30;" text="REFILL">
+            <Button fx:id="refillBtn" minWidth="100.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="1000.0" style="-fx-border-radius: 30;" text="REFILL">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button minWidth="100.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="1000.0" style="-fx-border-radius: 30px;" text="RECOVER">
+            <Button id="recoverBtn" fx:id="recoverBtn" minWidth="100.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="1000.0" style="-fx-border-radius: 30px;" text="RECOVER">
                <font>
                   <Font size="18.0" />
                </font>
@@ -68,9 +68,9 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="44.0" prefWidth="527.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="39.0" prefWidth="527.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <HBox id="machineStatusLabel" alignment="CENTER" prefHeight="39.0" prefWidth="527.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label text="Label">
+                              <Label id="machineStatusLabel" fx:id="machineStatusLabel" text="Label">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -101,9 +101,9 @@
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="44.0" prefWidth="527.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="39.0" prefWidth="527.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <HBox id="selfTestsNumLabel" alignment="CENTER" prefHeight="39.0" prefWidth="527.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label text="Label">
+                              <Label fx:id="selfTestsNumLabel" text="Label">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
