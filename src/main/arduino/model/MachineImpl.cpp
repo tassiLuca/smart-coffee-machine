@@ -5,6 +5,12 @@
 #include "../setup.h"
 #include "../boundary/HwCoffeeMachineFactory.h"
 
+#define START_DISPENSING_MSG ("Making " + String(selectedProduct->toString()))
+#define STOP_DISPENSING_MSG  ("The " + String(selectedProduct->toString()) + " is ready")
+#define PRODUCT_NA ("=>" + selectedProduct->toString() + " NOT AVAILABLE!")
+#define SELECTED_PRODUCT_MSG \
+    ("=>" + selectedProduct->toString() + ", Sugar: " + String(sugarLevel) + "/" + String(MAX_SUGAR_LEVEL))
+
 /* This is the interrupt handler associated to the movement detector in order to
  * awake the microcontroller when someone is nearby the machine. */
 void detection() { }
@@ -78,12 +84,7 @@ void MachineImpl::refill() {
 }
 
 void MachineImpl::displaySelections() {
-    if (!selectedProduct->isAvailable()) {
-        displayMessage("=>" + selectedProduct->toString() + " NOT AVAILABLE!");
-    } else {
-        displayMessage("=>" + selectedProduct->toString() + 
-            ", Sugar: " + String(sugarLevel) + "/" + String(MAX_SUGAR_LEVEL));
-    }
+    displayMessage(selectedProduct->isAvailable() ? SELECTED_PRODUCT_MSG : PRODUCT_NA);
 }
 
 void MachineImpl::displayMessage(String msg) {
@@ -110,16 +111,23 @@ bool MachineImpl::isMaking() {
     return (makeButton->isPressed() && selectedProduct->isAvailable()) || making;
 }
 
-void MachineImpl::make() {
+bool MachineImpl::moveServo(const int speed, const String startMessage, const String endMessage) {
     static int angle = 0;
-    if (angle == 0) {
-        displayMessage("Making " + String(selectedProduct->toString()));
-    }
-    making = true;
-    servoMotor->setPosition(angle++);
+    if (angle == 0) { displayMessage(startMessage); }
+    servoMotor->setPosition(angle);
     if (angle == 180) {
-        displayMessage("The " + String(selectedProduct->toString()) + " ready");
+        displayMessage(endMessage);
         angle = 0;
+        return true;
+    } 
+    angle += speed;
+    return false;
+}
+
+void MachineImpl::make() {
+    making = true;
+    bool completed = moveServo(2, START_DISPENSING_MSG, STOP_DISPENSING_MSG);
+    if (completed) {
         making = false;
         selectedProduct->consume();
     }
@@ -130,15 +138,12 @@ int MachineImpl::getDistance() {
 }
 
 void MachineImpl::test() {
-    static int angle = 0;
     testing = true;
-    servoMotor->setPosition(angle);
-    angle += 5;
-    if (angle == 180) {
+    bool completed = moveServo(5);
+    if (completed) {
         selfTests++;
         testing = false;
-        angle = 0;
-        servoMotor->setPosition(angle);
+        servoMotor->setPosition(0);
     }
 }
 

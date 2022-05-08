@@ -34,7 +34,7 @@ private:
     TemperatureSensor* temperatureSensor;
     // methods
     std::list<Product*>::iterator getRefToCurrentSelectedProduct();
-    void moveServo();
+    bool moveServo(const int speed, const String startMsg="", const String endMsg="");
 
 public:
     MachineImpl(const int productsQuantity);
