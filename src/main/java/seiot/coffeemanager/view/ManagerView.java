@@ -4,6 +4,9 @@ import seiot.coffeemanager.controller.ActiveController;
 import seiot.coffeemanager.utils.EventSubscriber;
 
 import java.util.Map;
+import java.util.Set;
+
+import com.google.gson.*;
 
 public interface ManagerView {
 
@@ -15,6 +18,6 @@ public interface ManagerView {
 
     void displaySelfTestsNum(int selfTestsNum);
 
-    void displayItemsNumber(Map<String, Integer> itemsNumber);
+    void displayItemsNumber(Set<Map.Entry<String, JsonElement>> itemsNumber);
 
 }

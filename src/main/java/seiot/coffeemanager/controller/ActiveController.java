@@ -1,5 +1,7 @@
 package seiot.coffeemanager.controller;
 
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
 import seiot.coffeemanager.utils.EventSubscriber;
 import seiot.coffeemanager.utils.RecoverEvent;
 import seiot.coffeemanager.utils.RefillEvent;
@@ -7,6 +9,11 @@ import seiot.coffeemanager.utils.SerialCommChannel;
 import seiot.coffeemanager.view.ManagerView;
 import com.jayway.jsonpath.JsonPath;
 import com.google.common.eventbus.Subscribe;
+import com.google.gson.*;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class ActiveController extends Thread implements EventSubscriber {
 
@@ -26,7 +33,7 @@ public class ActiveController extends Thread implements EventSubscriber {
                 msg = this.channel.receiveMsg();
                 extractInfos(msg);
             } catch (Exception e) {
-                System.out.println("Not useful info");
+                e.printStackTrace();
             }
         }
     }
@@ -36,9 +43,12 @@ public class ActiveController extends Thread implements EventSubscriber {
         int testsNum = JsonPath.read(info, "$.tests");
         this.view.displayMachineStatus(status);
         this.view.displaySelfTestsNum(testsNum);
-        System.out.println(info);
-        // var productsWithCount = new HashMap<String, Integer>();
-        // Integer products = JsonPath.read(info, "$.products.length()");
+        Set<Map.Entry<String, JsonElement>> prods = JsonParser.parseString(info)
+                .getAsJsonObject()
+                .get("products")
+                .getAsJsonObject().entrySet();
+
+        this.view.displayItemsNumber(prods);
     }
 
 

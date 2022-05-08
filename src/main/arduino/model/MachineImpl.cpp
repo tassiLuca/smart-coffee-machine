@@ -160,11 +160,12 @@ bool MachineImpl::detectingSomeone() {
 }
 
 String MachineImpl::getInfos() {
-    String infos = "{'status':" + String(currentState) + ",'tests':" + selfTests + ",'products':[{";
+    String infos = "{'status':" + String(currentState) + ",'tests':" + selfTests + ",'products':{";
     std::list<Product*>::iterator product;
     for (product = products.begin(); product != products.end(); product++) {
-        infos += ",'" + (*product)->toString() + "':" + (*product)->getLeftQuantity();
+        infos += "'" + (*product)->toString() + "':" + (*product)->getLeftQuantity() + ",";
     }
-    infos += "}]}";
+    infos.remove(infos.length() - 1);
+    infos += "}}";
     return infos;
 };

@@ -53,6 +53,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.google.guava/guava
     implementation("com.google.guava:guava:31.1-jre")
+
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    implementation("com.google.code.gson:gson:2.9.0")
 }
 
 tasks.withType<JavaCompile> {

@@ -117,7 +117,7 @@
                   <Blend />
                </effect>
             </SplitPane>
-            <BarChart fx:id="productsChart" prefHeight="232.0" prefWidth="780.0">
+            <BarChart fx:id="productsChart" animated="false" prefHeight="232.0" prefWidth="780.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>

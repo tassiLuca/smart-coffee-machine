@@ -14,6 +14,8 @@ import seiot.coffeemanager.utils.Event;
 import seiot.coffeemanager.utils.EventSubscriber;
 
 import java.util.Map;
+import java.util.Set;
+import com.google.gson.*;
 
 public class ManagerViewImpl extends Application implements ManagerView {
 
@@ -61,8 +63,9 @@ public class ManagerViewImpl extends Application implements ManagerView {
     }
 
     @Override
-    public void displayItemsNumber(Map<String, Integer> itemsNumber) {
-
+    public void displayItemsNumber(Set<Map.Entry<String, JsonElement>> itemsNumber) {
+        // TODO null pointer exception
+        Platform.runLater(() -> viewController.setChart(itemsNumber));
     }
 
 }
