@@ -47,6 +47,11 @@ public:
     virtual bool productsAvailable() = 0;
 
     /**
+     * @brief Refills all the products. 
+     */
+    virtual void refill() = 0;
+
+    /**
      * @brief Displays the current sugar level and the current selected product.
      */
     virtual void displaySelections() = 0;

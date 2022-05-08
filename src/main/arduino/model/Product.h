@@ -16,6 +16,11 @@ public:
     virtual void consume() = 0;
 
     /**
+     * @brief Refills the quantity of this product. 
+     */
+    virtual void refill(const int quantity) = 0;
+
+    /**
      * @brief Gets the remaining amount of this product.
      * @return int the units of product left.
      */

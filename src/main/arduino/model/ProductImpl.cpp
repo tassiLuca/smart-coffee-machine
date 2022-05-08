@@ -10,6 +10,10 @@ void ProductImpl::consume() {
     }
 }
 
+void ProductImpl::refill(const int quantity) {
+    this->quantity = quantity;
+}
+
 int ProductImpl::getLeftQuantity() {
     return quantity;
 }

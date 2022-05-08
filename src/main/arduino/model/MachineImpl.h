@@ -14,6 +14,7 @@ class MachineImpl : public Machine
 
 private:
     // variables
+    int productsCapacity;
     Product* selectedProduct;
     std::list<Product*> products;
     int sugarLevel = DEFAULT_SUGAR;
@@ -40,6 +41,7 @@ public:
     bool updateSugarLevel() override;
     bool updateSelectedProduct() override;
     bool productsAvailable() override;
+    void refill() override;
     void displaySelections() override;
     void displayMessage(String msg) override;
     void make() override;

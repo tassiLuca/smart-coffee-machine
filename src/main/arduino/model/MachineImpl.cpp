@@ -21,6 +21,7 @@ MachineImpl::MachineImpl(const int productsQuantity) {
     pirSensor->attachInterruptOnDetection(detection);
     temperatureSensor = f->createTemperatureSensor(TEMPERATURE_SENSOR_PIN);
     // products
+    productsCapacity = productsQuantity;
     products.push_back(new ProductImpl("Coffee", productsQuantity));
     products.push_back(new ProductImpl("Tea", productsQuantity));
     products.push_back(new ProductImpl("Chocolate", productsQuantity));
@@ -67,9 +68,20 @@ bool MachineImpl::productsAvailable() {
     return totalNumOfProducts > 0;
 }
 
+void MachineImpl::refill() {
+    std::list<Product*>::iterator product;
+    for (product = products.begin(); product != products.end(); product++) {
+        (*product)->refill(productsCapacity);
+    }
+}
+
 void MachineImpl::displaySelections() {
-    displayMessage("=>" + selectedProduct->toString() + 
-        ", Sugar: " + String(sugarLevel) + "/" + String(MAX_SUGAR_LEVEL));
+    if (!selectedProduct->isAvailable()) {
+        displayMessage("=>" + selectedProduct->toString() + " NOT AVAILABLE!");
+    } else {
+        displayMessage("=>" + selectedProduct->toString() + 
+            ", Sugar: " + String(sugarLevel) + "/" + String(MAX_SUGAR_LEVEL));
+    }
 }
 
 void MachineImpl::displayMessage(String msg) {
