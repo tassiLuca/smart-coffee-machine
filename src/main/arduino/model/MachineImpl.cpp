@@ -5,6 +5,8 @@
 #include "../setup.h"
 #include "../boundary/HwCoffeeMachineFactory.h"
 
+/* This is the interrupt handler associated to the movement detector in order to
+ * awake the microcontroller when someone is nearby the machine. */
 void detection() { }
 
 MachineImpl::MachineImpl(const int productsQuantity) {
@@ -102,7 +104,10 @@ void MachineImpl::setMachineState(MachineState nextState) {
 }
 
 bool MachineImpl::isMaking() {
-    return makeButton->isPressed() || making;
+    // returns true if the button MAKE has just been pressed and the current 
+    // selected product is available (the dispensing process is going to start) 
+    // or the dispensing process is already in progress.
+    return (makeButton->isPressed() && selectedProduct->isAvailable()) || making;
 }
 
 void MachineImpl::make() {
