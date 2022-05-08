@@ -1,23 +1,21 @@
 package seiot.coffeemanager.utils;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import com.google.common.eventbus.EventBus;
 
 public abstract class AbstractEventPublisher implements EventPublisher {
 
-    private final Set<EventSubscriber> subscribers = new HashSet<>();
+    private final EventBus eventBus = new EventBus();
 
     public void post(final Event event) {
-        subscribers.forEach(EventSubscriber::notifyEvent);
+        eventBus.post(event);
     }
 
     public void register(final EventSubscriber subscriber) {
-        subscribers.add(Objects.requireNonNull(subscriber));
+        eventBus.register(subscriber);
     }
 
     public void unregister(final EventSubscriber subscriber) {
-        subscribers.remove(subscriber);
+        eventBus.unregister(subscriber);
     }
 
 }

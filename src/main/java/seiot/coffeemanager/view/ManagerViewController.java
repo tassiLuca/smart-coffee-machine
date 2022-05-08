@@ -39,13 +39,11 @@ public class ManagerViewController extends AbstractEventPublisher {
 
     @FXML
     public void refillBtnPressed() {
-        System.out.println("REFILL BTN PRESSED");
         this.post(new RefillEvent());
     }
 
     @FXML
     public void recoverBtnPressed() {
-        System.out.println("RECOVER BTN PRESSED");
         this.post(new RecoverEvent());
     }
 
