@@ -18,7 +18,7 @@ private:
     MachineState currentState = READY;
     bool making = false;
     bool testing = false;
-    StaticJsonDocument<60> doc;
+    // StaticJsonDocument<60> doc;
     // sensors
     Display* display;
     Button* upButton;

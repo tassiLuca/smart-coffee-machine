@@ -16,7 +16,6 @@ private:
 public:
     DisplayImpl(const uint8_t rows, const uint8_t columns);
     void print(String text);
-    void printOnPosition(String text, std::pair<int, int> position);
     void clear();
 
 };

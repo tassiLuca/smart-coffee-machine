@@ -20,11 +20,11 @@ void setup() {
     Task* t = new MainTask(100, machine);
     Task* t2 = new DispensingTask(50, machine);
     Task* t3 = new SelfTestingTask(500, machine);
-    Task* t4 = new CommunicationTask(1000, machine);
+    // Task* t4 = new CommunicationTask(1000, machine);
     scheduler->addTask(t);
     scheduler->addTask(t2);
     scheduler->addTask(t3);
-    scheduler->addTask(t4);
+    //scheduler->addTask(t4);
 }
 
 void loop() {

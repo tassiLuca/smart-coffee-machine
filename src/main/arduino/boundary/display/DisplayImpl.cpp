@@ -27,13 +27,15 @@ uint8_t DisplayImpl::getDisplayAddress()
     return 0;
 }
 
-void DisplayImpl::printOnPosition(String text, std::pair<int, int> position) {
-    lcd->setCursor(position.first, position.second);
-    lcd->print(text);
-};
-
 void DisplayImpl::print(String text) {
-    printOnPosition(text, std::pair<int, int>(0, 0));
+    lcd->setCursor(0, 0);
+    if (text.length() > columns) {
+        lcd->print(text.substring(0, columns));
+        lcd->setCursor(0, 1);
+        lcd->print(text.substring(columns));
+    } else {
+        lcd->print(text);
+    }
 }
 
 void DisplayImpl::clear() {

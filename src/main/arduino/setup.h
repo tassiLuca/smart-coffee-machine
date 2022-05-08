@@ -25,7 +25,7 @@
 // +     SDA     +      A4     +
 // +-------------+-------------+
 // Refer to [https://www.arduino.cc/en/reference/wire] 
-#define DISPLAY_COLS 20
+#define DISPLAY_COLS 16
 #define DISPLAY_ROWS 2
 
 // Servo motor.

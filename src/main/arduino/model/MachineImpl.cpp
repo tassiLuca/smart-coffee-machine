@@ -76,16 +76,17 @@ bool MachineImpl::productsAvailable() {
 }
 
 void MachineImpl::displaySelections() {
-    displayMessage(selectedProduct->toString() + " Sugar level: " + String(sugarLevel));
+    displayMessage("=>" + selectedProduct->toString() + 
+        ", Sugar: " + String(sugarLevel) + "/" + String(MAX_SUGAR_LEVEL));
 }
 
 void MachineImpl::displayMessage(String msg) {
     static String oldMsg;
     if (msg != oldMsg) {
         display->clear();
+        display->print(msg);
         oldMsg = msg;
     }
-    display->print(msg);
 }
 
 MachineState MachineImpl::getMachineState() {
@@ -145,12 +146,12 @@ bool MachineImpl::detectingSomeone() {
 }
 
 JsonDocument& MachineImpl::getInfos() {
-    doc.clear();
-    doc["status"] = getMachineState();
-    doc["tests"] = selfTests;
-    std::list<Product*>::iterator product;
-    for (product = products.begin(); product != products.end(); product++) {
-        doc[(*product)->toString()] = (*product)->getLeftQuantity();
-    }
-    return doc;
+    // doc.clear();
+    // doc["status"] = getMachineState();
+    // doc["tests"] = selfTests;
+    // std::list<Product*>::iterator product;
+    // for (product = products.begin(); product != products.end(); product++) {
+    //     doc[(*product)->toString()] = (*product)->getLeftQuantity();
+    // }
+    // return doc;
 };
