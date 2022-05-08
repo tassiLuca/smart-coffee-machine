@@ -29,12 +29,12 @@
    <bottom>
       <HBox prefHeight="90.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="refillBtn" minWidth="100.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="1000.0" style="-fx-border-radius: 30;" text="REFILL">
+            <Button fx:id="refillBtn" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#refillBtnPressed" prefHeight="90.0" prefWidth="1000.0" style="-fx-border-radius: 30;" text="REFILL">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button id="recoverBtn" fx:id="recoverBtn" minWidth="100.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="1000.0" style="-fx-border-radius: 30px;" text="RECOVER">
+            <Button id="recoverBtn" fx:id="recoverBtn" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#recoverBtnPressed" prefHeight="90.0" prefWidth="1000.0" style="-fx-border-radius: 30px;" text="RECOVER">
                <font>
                   <Font size="18.0" />
                </font>
@@ -117,7 +117,7 @@
                   <Blend />
                </effect>
             </SplitPane>
-            <BarChart prefHeight="232.0" prefWidth="780.0">
+            <BarChart fx:id="productsChart" prefHeight="232.0" prefWidth="780.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
