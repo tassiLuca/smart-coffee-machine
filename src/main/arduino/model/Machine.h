@@ -113,10 +113,9 @@ public:
      * @brief Gets all the machine infos, including: its current status,
      * the number of self tests performed since the boot and the availability
      * of each product.
-     * @return JsonDocument& a reference to a JsonDocument with all the the infos.
-     * @see [https://arduinojson.org](ArduinoJson)
+     * @return String string with all infos in JSON format
      */
-    virtual JsonDocument& getInfos() = 0;
+    virtual String getInfos() = 0;
 
 };
 

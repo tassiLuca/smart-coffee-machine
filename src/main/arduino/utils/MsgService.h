@@ -2,7 +2,6 @@
 #define __MSGSERVICE__
 
 #include "Arduino.h"
-#include <ArduinoJson.h>
 
 class Msg {
   String content;
@@ -38,7 +37,6 @@ public:
     
     void sendMsg(const Msg& msg);
     void sendMsg(const String& msg);
-    void sendMsg(const JsonDocument& doc);
 };
 
 extern MsgServiceClass MsgService;

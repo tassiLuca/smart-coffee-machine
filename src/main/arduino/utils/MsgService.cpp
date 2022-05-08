@@ -37,11 +37,6 @@ void MsgServiceClass::sendMsg(const Msg& msg){
     Serial.println(msg.getContent());  
 }
 
-void MsgServiceClass::sendMsg(const JsonDocument& doc) {
-    serializeJson(doc, Serial);
-    Serial.println();
-}
-
 void serialEvent() {
     /* reading the content */
     while (Serial.available()) {

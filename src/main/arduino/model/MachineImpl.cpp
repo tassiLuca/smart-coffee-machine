@@ -137,13 +137,12 @@ bool MachineImpl::detectingSomeone() {
     return pirSensor->isMovementDetected();
 }
 
-JsonDocument& MachineImpl::getInfos() {
-    // doc.clear();
-    // doc["status"] = getMachineState();
-    // doc["tests"] = selfTests;
-    // std::list<Product*>::iterator product;
-    // for (product = products.begin(); product != products.end(); product++) {
-    //     doc[(*product)->toString()] = (*product)->getLeftQuantity();
-    // }
-    // return doc;
+String MachineImpl::getInfos() {
+    String infos = "{'status':" + String(currentState) + ",'tests':" + selfTests + ",'products':[{";
+    std::list<Product*>::iterator product;
+    for (product = products.begin(); product != products.end(); product++) {
+        infos += ",'" + (*product)->toString() + "':" + (*product)->getLeftQuantity();
+    }
+    infos += "}]}";
+    return infos;
 };

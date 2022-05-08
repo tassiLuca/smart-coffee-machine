@@ -21,7 +21,6 @@ private:
     bool making = false;
     bool testing = false;
     MachineState currentState = READY;
-    // StaticJsonDocument<60> doc;
     // sensors
     Display* display;
     Button* upButton;
@@ -52,7 +51,7 @@ public:
     bool detectingSomeone() override;
     void setMachineState(MachineState nextState) override;
     MachineState getMachineState() override;
-    JsonDocument& getInfos() override;
+    String getInfos() override;
 
 };
 
