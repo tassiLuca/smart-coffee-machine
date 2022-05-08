@@ -5,12 +5,7 @@
 #include "../setup.h"
 #include "../boundary/HwCoffeeMachineFactory.h"
 
-#define DEFAULT_SUGAR 1
-#define MAX_SUGAR_LEVEL 5
-
-void detection() {
-    Serial.println("PIR DETECTION");
-}
+void detection() { }
 
 MachineImpl::MachineImpl(const int productsQuantity) {
     // sensors and actuators
@@ -21,10 +16,8 @@ MachineImpl::MachineImpl(const int productsQuantity) {
     makeButton = f->createButton(MAKE_BTN);
     pot = f->createPotentiometer(POTENTIOMETER_PIN);
     servoMotor = f->createServoMotor(SERVO_MOTOR_PIN);
-    servoMotor->on();
     sonarSensor = f->createUltrasonic(SONAR_TRIGGER_PIN, SONAR_ECHO_PIN);
     pirSensor = f->createPirSensor(PIR_SENSOR);
-    pirSensor->calibrate();
     pirSensor->attachInterruptOnDetection(detection);
     temperatureSensor = f->createTemperatureSensor(TEMPERATURE_SENSOR_PIN);
     // products
@@ -32,7 +25,6 @@ MachineImpl::MachineImpl(const int productsQuantity) {
     products.push_back(new ProductImpl("Tea", productsQuantity));
     products.push_back(new ProductImpl("Chocolate", productsQuantity));
     selectedProduct = products.front();
-    sugarLevel = DEFAULT_SUGAR;
 }
 
 bool MachineImpl::updateSugarLevel() {

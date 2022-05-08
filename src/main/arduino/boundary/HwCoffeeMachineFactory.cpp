@@ -21,7 +21,9 @@ Display* HwCoffeMachineFactory::createDisplay(const int rows, const int cols) co
 }
 
 ServoMotor* HwCoffeMachineFactory::createServoMotor(const int servoMotorPin) const {
-    return new ServoMotorImpl(servoMotorPin);
+    auto servo = new ServoMotorImpl(servoMotorPin);
+    servo->on();
+    return servo;
 }
 
 TemperatureSensor* HwCoffeMachineFactory::createTemperatureSensor(const int tempSensorPin) const {
@@ -33,5 +35,7 @@ Ultrasonic* HwCoffeMachineFactory::createUltrasonic(const int triggerPin, const 
 }
 
 MovementDetector* HwCoffeMachineFactory::createPirSensor(const int pirSensorPin) const {
-    return new PirSensor(pirSensorPin);
+    auto pir = new PirSensor(pirSensorPin);
+    pir->calibrate();
+    return pir;
 }

@@ -6,18 +6,21 @@
 #include "Machine.h"
 #include "../boundary/CoffeeMachineFactory.h"
 
+#define DEFAULT_SUGAR 1
+#define MAX_SUGAR_LEVEL 5
+
 class MachineImpl : public Machine 
 {
 
 private:
     // variables
-    std::list<Product*> products;
-    int sugarLevel;
-    int selfTests = 0;
     Product* selectedProduct;
-    MachineState currentState = READY;
+    std::list<Product*> products;
+    int sugarLevel = DEFAULT_SUGAR;
+    int selfTests = 0;
     bool making = false;
     bool testing = false;
+    MachineState currentState = READY;
     // StaticJsonDocument<60> doc;
     // sensors
     Display* display;
