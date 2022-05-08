@@ -3,7 +3,8 @@
 #include "ReadyState.h"
 
 void SleepState::handle() {
-    getMachine()->displayMessage("SLEEP MODE");
+    getMachine()->displayMessage("Sleep mode!");
+    getMachine()->setMachineState(SLEEPING);
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     sleep_enable();
     sleep_mode();

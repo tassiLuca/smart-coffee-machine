@@ -16,7 +16,9 @@ enum MachineState {
     /** The machine in an assistance state. No products can be made */
     ASSISTANCE, 
     /** The machine is doing a self test */
-    TESTING 
+    TESTING,
+    /** The machine is sleeping */
+    SLEEPING
 };
 
 /**
