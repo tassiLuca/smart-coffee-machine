@@ -7,9 +7,9 @@
 
 #define START_DISPENSING_MSG ("Making " + String(selectedProduct->toString()))
 #define STOP_DISPENSING_MSG  ("The " + String(selectedProduct->toString()) + " is ready")
-#define PRODUCT_NA ("=>" + selectedProduct->toString() + " NOT AVAILABLE!")
+#define PRODUCT_NA ("=> " + selectedProduct->toString() + " NOT AVAILABLE!")
 #define SELECTED_PRODUCT_MSG \
-    ("=>" + selectedProduct->toString() + ", Sugar: " + String(sugarLevel) + "/" + String(MAX_SUGAR_LEVEL))
+    ("=> " + selectedProduct->toString() + ", Sugar: " + String(sugarLevel))
 
 /* This is the interrupt handler associated to the movement detector in order to
  * awake the microcontroller when someone is nearby the machine. */

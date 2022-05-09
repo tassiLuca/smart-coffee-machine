@@ -15,7 +15,7 @@ private:
 
 public:
     DisplayImpl(const uint8_t rows, const uint8_t columns);
-    void print(String text);
+    void print(const String text);
     void clear();
 
 };

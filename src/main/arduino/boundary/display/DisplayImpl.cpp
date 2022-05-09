@@ -27,12 +27,14 @@ uint8_t DisplayImpl::getDisplayAddress()
     return 0;
 }
 
-void DisplayImpl::print(String text) {
+void DisplayImpl::print(const String text) {
     lcd->setCursor(0, 0);
     if (text.length() > columns) {
-        lcd->print(text.substring(0, columns));
+        auto firstLine = text.substring(0, columns);
+        auto secondLine = text.substring(columns);
+        lcd->print(firstLine);
         lcd->setCursor(0, 1);
-        lcd->print(text.substring(columns));
+        lcd->print(secondLine);
     } else {
         lcd->print(text);
     }
