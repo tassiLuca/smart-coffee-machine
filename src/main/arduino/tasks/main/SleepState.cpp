@@ -10,5 +10,6 @@ void SleepState::handle() {
     sleep_mode();
     /** The program will continue from here when
      *  an interrupt from the pir sensor occours. */
+    getMachine()->setMachineState(READY);
     getTask()->stateTransition(new ReadyState());
 }
