@@ -20,7 +20,7 @@ public class ActiveController extends Thread implements EventSubscriber {
     private SerialCommChannel channel;
     private ManagerView view;
 
-    public ActiveController(SerialCommChannel channel, ManagerView view) {
+    public ActiveController(final SerialCommChannel channel, final ManagerView view) {
         this.channel = channel;
         this.view = view;
         this.view.setController(this);
@@ -38,27 +38,26 @@ public class ActiveController extends Thread implements EventSubscriber {
         }
     }
 
-    public void extractInfos(String info) {
-        String status = Integer.toString(JsonPath.read(info, "$.status"));
-        int testsNum = JsonPath.read(info, "$.tests");
+    public void extractInfos(final String info) {
+        final int status = JsonPath.read(info, "$.status");
+        final int testsNum = JsonPath.read(info, "$.tests");
         this.view.displayMachineStatus(status);
         this.view.displaySelfTestsNum(testsNum);
         Set<Map.Entry<String, JsonElement>> prods = JsonParser.parseString(info)
                 .getAsJsonObject()
                 .get("products")
                 .getAsJsonObject().entrySet();
-
         this.view.displayItemsNumber(prods);
     }
 
 
     @Subscribe
-    public void notifyEvent(RefillEvent event) {
+    public void notifyEvent(final RefillEvent event) {
         this.channel.sendMsg("REFILL");
     }
 
     @Subscribe
-    public void notifyEvent(RecoverEvent event) {
+    public void notifyEvent(final RecoverEvent event) {
         this.channel.sendMsg("RECOVER");
     }
 

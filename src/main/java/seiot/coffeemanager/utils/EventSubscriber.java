@@ -1,5 +1,6 @@
 package seiot.coffeemanager.utils;
 
-public interface EventSubscriber {
-
-}
+/**
+ * An interface modeling an entity which listen event occurs.
+ */
+public interface EventSubscriber { }

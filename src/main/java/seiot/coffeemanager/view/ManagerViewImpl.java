@@ -27,14 +27,7 @@ public class ManagerViewImpl extends Application implements ManagerView {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/SimpleGui.fxml"));
         final Parent root = loader.load();
         viewController = loader.getController();
-        viewController.setMachineStatusLabel("Hello boys");
-
-        try {
-            viewController.register(eventController);
-        } catch(Exception e) {
-            System.out.println("CONTROLLER NULL");
-        }
-
+        viewController.register(eventController);
         final Scene scene = new Scene(root);
         primaryStage.setTitle("App FXML");
         primaryStage.setScene(scene);
@@ -46,24 +39,24 @@ public class ManagerViewImpl extends Application implements ManagerView {
     }
 
     @Override
-    public void setController(EventSubscriber controller) {
+    public void setController(final EventSubscriber controller) {
         eventController = controller;
     }
 
     @Override
-    public void displayMachineStatus(String status) {
+    public void displayMachineStatus(final int status) {
         // TODO null pointer exception
         Platform.runLater(() -> viewController.setMachineStatusLabel(status));
     }
 
     @Override
-    public void displaySelfTestsNum(int selfTestsNum) {
+    public void displaySelfTestsNum(final int selfTestsNum) {
         // TODO null pointer exception
         Platform.runLater(() -> viewController.setSelfTestsNumLabel(Integer.toString(selfTestsNum)));
     }
 
     @Override
-    public void displayItemsNumber(Set<Map.Entry<String, JsonElement>> itemsNumber) {
+    public void displayItemsNumber(final Set<Map.Entry<String, JsonElement>> itemsNumber) {
         // TODO null pointer exception
         Platform.runLater(() -> viewController.setChart(itemsNumber));
     }

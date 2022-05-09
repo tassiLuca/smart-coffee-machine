@@ -1,4 +1,6 @@
 package seiot.coffeemanager.utils;
 
-public interface Event {
-}
+/** 
+ * A simple interface representing an Event which can occurs.
+ */
+public interface Event { }
