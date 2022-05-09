@@ -56,14 +56,10 @@ Task o-right-> State
 State o-left-> Task
 
 class InitState { }
-class ReadyState { }
+class ReadyState { }
 
 State <|-- InitState
 State <|-- ReadyState
-
-MainTask -[dashed]right-> InitState : uses
-MainTask -[dashed]left-> ReadyState : uses
-
 
 interface Machine {
     + getSelectedProduct() : Product*
