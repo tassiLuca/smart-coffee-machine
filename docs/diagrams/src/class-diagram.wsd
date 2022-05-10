@@ -3,7 +3,7 @@
 class Scheduler {
     - basePeriod: int 
     - tasks: list<Task*>
-    - timer: Timer
+    - timer: Timer1
     - elapsedTime: int
     + Scheduler(basePeriod: int)
     + addTask(task:Task*): bool
@@ -20,7 +20,7 @@ interface Task {
 
 Scheduler "1" *-right-> "*" Task
 
-abstract class BaseTask {
+abstract class BaseTask implements Task {
     - myPeriod: int
     - elapsedTime: int
     - currentState: State*
@@ -34,17 +34,18 @@ abstract class BaseTask {
     + getMachine(): Machine*
 }
 
-Task <|-- BaseTask
+class MainTask extends BaseTask
+class DispensingTask extends BaseTask
+class SelfTestingTask extends BaseTask
+class CommunicationTask extends BaseTask
 
-class MainTask 
-BaseTask <|-- MainTask
-
-class DispensingTask
-BaseTask <|-- DispensingTask
-
-class SelfTestingTask
-BaseTask <|-- SelfTestingTask
-
+note right of State
+State pattern: all the 
+concrete states extends 
+this abstract class
+re-defining the handle()
+method.
+end note
 abstract class State {
     - task: Task*
     + setTask(task: Task*)
@@ -55,22 +56,50 @@ abstract class State {
 Task o-right-> State
 State o-left-> Task
 
-class InitState { }
-class ReadyState { }
-
-State <|-- InitState
-State <|-- ReadyState
-
 interface Machine {
-    + getSelectedProduct() : Product*
-    + selectProduct(product: Product*)
-    + displayMessage(msg: String)
+    + updateSugarLevel(): bool
+    + updateSelectedProduct(): bool
+    + refill()
+    + displaySelections()
     + make()
-    + isDispensing(): bool
-    + isAvailable(): bool
+    + isMaking(): bool
+    + test()
+    + isTesting(): bool
+    + getMachineTemperature(): float
+    + detectingSomeone(): bool
+    + setMachineState(MachineState state)
+    + getMachineState(): MachineState
+    + getInfos(): String
 }
 
 Machine --o Task
+
+note right of MachineState
+The predefined states in 
+which the machine can be. 
+This is used for a shared 
+variable for orchestrating
+all the tasks.
+end note
+enum MachineState {
+    READY,
+    DISPENSING,
+    ASSISTANCE,
+    TESTING,
+    SLEEPING
+}
+
+Machine -right-* MachineState
+
+interface Product {
+    + consume()
+    + refill(quantity: int)
+    + getLeftQuantity(): int
+    + isAvailable(): bool
+    + toString(): String
+}
+
+Machine -left-o Product
 
 
 @enduml

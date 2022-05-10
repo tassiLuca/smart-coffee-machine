@@ -22,7 +22,7 @@ Below, a short video demonstrating the logic of the system:
 ## Breadboard schema
 Below, the schematic of the circuit:
 
-![Breadboard circuit schema](breadboard-circuit.png)
+![Breadboard circuit schema](out/breadboard-circuit.png)
 
 ## Design
 The focus of this section is on the design choices made along the development process to meet the requirements. 
