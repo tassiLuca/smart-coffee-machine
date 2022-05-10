@@ -1,7 +1,7 @@
 #ifndef __TASK__
 #define __TASK__
 
-#include "../model/Machine.h"
+#include "../machine/Machine.h"
 
 class State;
 

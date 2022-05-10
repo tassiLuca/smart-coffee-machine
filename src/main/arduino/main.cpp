@@ -5,7 +5,7 @@
 #include "tasks/dispensing/DispensingTask.h"
 #include "tasks/selftest/SelfTestingTask.h"
 #include "tasks/communication/CommunicationTask.h"
-#include "model/MachineImpl.h"
+#include "machine/MachineImpl.h"
 #include "utils/MsgService.h"
 
 Scheduler* scheduler;
