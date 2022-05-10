@@ -53,26 +53,33 @@
 <li><a href="#breadboard-schema">Breadboard schema</a></li>
 <li><a href="#design">Design</a>
 <ul>
+<li><a href="#arduino">Arduino</a>
+<ul>
 <li><a href="#main-task">Main Task</a></li>
 <li><a href="#dispensing-task">Dispensing Task</a></li>
 <li><a href="#self-test-task">Self-Test Task</a></li>
 <li><a href="#communication-task">Communication Task</a></li>
 </ul>
 </li>
+<li><a href="#uml-class-diagram">UML Class Diagram</a></li>
+<li><a href="#java-program">Java Program</a></li>
+</ul>
+</li>
+<li><a href="#known-problems">Known problems</a></li>
 </ul>
 </li>
 </ul>
-<p>This is a short report explaining the modeling choices made during the development process of this Smart Coffee Machine.</p>
+<p>This is a short report explaining the modeling choices made during the development process of this project.</p>
 <h2 id="requirements">Requirements</h2>
 <p>All the requirements of the system can be found <a href="requirements.pdf">here</a>.</p>
-<p>Below, a short video demonstrating the logic of the system:</p>
-<p><strong>TODO</strong></p>
+<p><a href="https://vimeo.com/708396322">Here</a> a short video demonstrating the logic of the system. (<a href="https://liveunibo-my.sharepoint.com/:v:/g/personal/luca_tassinari10_studio_unibo_it/Ecq0tX3gTXlNoXPDvmoMskEBw_afZvgDmWRDl6LzyXkzxw?e=sk03Se">Backup video</a> on Unibo Onedrive account in case of problems).</p>
 <h2 id="breadboard-schema">Breadboard schema</h2>
-<p>Below, the schematic of the circuit:</p>
-<p><img src="file:////Users/lucatassi/Projects/smart-cofee-machine/docs/breadboard-circuit.png" alt="Breadboard circuit schema"></p>
+<p>Below, the schematic of the circuit (<a href="https://www.tinkercad.com/things/3xcZR1LJb7j">here</a> the editable schema on Tinkercad):</p>
+<p><img src="file:////Users/lucatassi/Projects/smart-cofee-machine/docs/out/breadboard-circuit.png" alt="Breadboard circuit schema"></p>
 <h2 id="design">Design</h2>
 <p>The focus of this section is on the design choices made along the development process to meet the requirements.</p>
-<p>The Arduino program has been conceived using a <strong>tasks-based architecture</strong> and <strong>synchronous Finite State Machines</strong>. For this purpose have been developed 4 different tasks, with different level of abstractions: a <strong>Main Task</strong>, a <strong>Dispensing Task</strong>, a <strong>Self-Test Task</strong> and a <strong>Communication Task</strong>.
+<h3 id="arduino">Arduino</h3>
+<p>The Arduino program has been conceived using a <strong>tasks-based architecture</strong> and <strong>synchronous Finite State Machines</strong> with a <strong>fully-static scheduler</strong>. For this purpose have been developed 4 different tasks, with different level of abstractions: a <strong>Main Task</strong>, a <strong>Dispensing Task</strong>, a <strong>Self-Test Task</strong> and a <strong>Communication Task</strong>.
 These tasks communicates each other using a shared variable, called <code>state</code> for sake semplicity in the following schemas, which can assume 4 different values:</p>
 <pre><code class="language-c"><div><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">MachineState</span> {</span> 
     <span class="hljs-comment">/** The machine is ready to start dispensing a new product */</span>
@@ -87,17 +94,36 @@ These tasks communicates each other using a shared variable, called <code>state<
     SLEEPING
 };
 </div></code></pre>
-<h3 id="main-task">Main Task</h3>
+<h4 id="main-task">Main Task</h4>
 <p>This is the core task of the system. It deals with the buttons and potentiometer management, opportuntly triggering the dispensing process of a product. It manages also the sleep state and the assistance state of the system, during which the machine cannot dispense any kind of product.</p>
 <p><img src="file:////Users/lucatassi/Projects/smart-cofee-machine/docs/out/state-chart-main-task.svg" alt="Main Task"></p>
 <p>According to some experiments, in order to not loose events, the period of this task has been set to 100ms: every 100ms the current state of this task is executed.</p>
-<h3 id="dispensing-task">Dispensing Task</h3>
-<p>This task takes care of the product dispensing process.</p>
+<h4 id="dispensing-task">Dispensing Task</h4>
+<p>This task takes care of the product dispensing process. It is executed with a period of 50ms.</p>
 <p><img src="file:////Users/lucatassi/Projects/smart-cofee-machine/docs/out/state-chart-dispensing-task.svg" alt="Dispensing Task"></p>
-<h3 id="self-test-task">Self-Test Task</h3>
-<p>This task every <code>T_check</code> make a self test and, depending on the system state, set appropriately the state to <code>ASSISTANCE</code>.</p>
+<h4 id="self-test-task">Self-Test Task</h4>
+<p>This task every <code>T_check</code> makes a self test and, depending on the system state, set appropriately the state to <code>ASSISTANCE</code> or <code>READY</code>.</p>
 <p><img src="file:////Users/lucatassi/Projects/smart-cofee-machine/docs/out/state-chart-self-test-task.svg" alt="Self-Test Task"></p>
-<h3 id="communication-task">Communication Task</h3>
+<p>Since <code>T_check</code> is a relatively long time, its period is set up 500ms.</p>
+<h4 id="communication-task">Communication Task</h4>
+<p>This task has only one state, during which:</p>
+<ul>
+<li>send the machine infos through the Serial line in order to setting up the GUI on the Java Program;</li>
+<li>check if some message has been posted on the Serial Line by the Java Program (in order to resume the machine status).</li>
+</ul>
+<p>Given its nature, this task was also conceived with a fairly long period of 1 second.</p>
+<h3 id="uml-class-diagram">UML Class Diagram</h3>
+<p>Below the UML Class Diagram of the solution. As you can see all the sensors and actuators, as well as the products management, are encapsulated inside a <code>Machine</code> abstraction, which exposes an API which make it possible to be controlled; all the tasks shares an instance of the machine.</p>
+<p>For what concerns the tasks and their states, here it is used the <a href="https://refactoring.guru/design-patterns/state">State Pattern (GoF)</a>.</p>
+<p><img src="file:////Users/lucatassi/Projects/smart-cofee-machine/docs/out/class-diagram.svg" alt="Uml Class Diagram"></p>
+<h3 id="java-program">Java Program</h3>
+<p>The Java Program consists of 2 main components:</p>
+<ul>
+<li>the view (<code>ManagerView, ManagerViewController</code>) for the GUI management;</li>
+<li>the controller (<code>ActiveController</code>): active component which interacts with the Arduino sub-system through the Serial Line.</li>
+</ul>
+<h2 id="known-problems">Known problems</h2>
+<p>As you can see from the video, sometimes the display doesn't show correctly the message at the end of the dispensing process. This is a bug which appears randomly whose causes are still to be investigated (probably: out of memory?)</p>
 
         
         
