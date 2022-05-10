@@ -14,5 +14,17 @@ The machine has a power-saving modality, so that it goes to sleep if it is idle 
 
 The Coffee Machine Manager application is used to monitor and check the state of the machine, as well as to refill it when there are no more products that can be made.
 
+## How to execute
+The arduino sub-system is made with [Platformio](https://platformio.org) and Visual Studio Code.
+The Java program is a Gradle project. Tu run as a gradle project:
+```sh
+./gradlew run --args="PORT_NAME"
+```
+To run the jar:
+```sh
+java -jar ./smart-coffee-machine-all.jar PORT_NAME
+```
+where `PORT_NAME` is the port to which is connected the Arduino.
+
 ## More infos
 Refers to the [report](./docs/report.md) for a short demo, the breadboard circuit schema and the state charts.
