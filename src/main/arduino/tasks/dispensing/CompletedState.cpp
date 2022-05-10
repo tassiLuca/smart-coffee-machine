@@ -3,10 +3,6 @@
 
 #define TIMEOUT_COMPLETED 10000
 
-/**
- * @todo reset posizione servo 
- */
-
 CompletedState::CompletedState() {
     enteredTime = millis();
 }
@@ -15,7 +11,7 @@ void CompletedState::handle() {
     if (checkTransition()) {
         if (getMachine()->productsAvailable()) {
             getMachine()->setMachineState(READY);
-            getMachine()->resetMotorPosition();
+            // getMachine()->resetMotorPosition();
         } else {
             getMachine()->setMachineState(ASSISTANCE);
         }

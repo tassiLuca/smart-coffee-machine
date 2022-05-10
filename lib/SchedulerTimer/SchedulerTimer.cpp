@@ -70,6 +70,12 @@ void SchedulerTimer::setupPeriod(int period){
 }
 
 void SchedulerTimer::waitForNextTick(){
+    // static unsigned long lastTime = millis();
+    // unsigned long now = millis();
+    // if (now - lastTime > 100) {
+    //     Serial.println("=> OVERRUN: " + String(now-lastTime));
+    // }
+    // lastTime = now;
     /* wait for timer signal */
     while (!timerFlag){}
     timerFlag = false;

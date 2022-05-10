@@ -9,6 +9,7 @@
     - [Dispensing Task](#dispensing-task)
     - [Self-Test Task](#self-test-task)
     - [Communication Task](#communication-task)
+  - [UML Class Diagram](#uml-class-diagram)
 
 This is a short report explaining the modeling choices made during the development process of this Smart Coffee Machine.
 
@@ -27,7 +28,7 @@ Below, the schematic of the circuit:
 ## Design
 The focus of this section is on the design choices made along the development process to meet the requirements. 
 
-The Arduino program has been conceived using a **tasks-based architecture** and **synchronous Finite State Machines**. For this purpose have been developed 4 different tasks, with different level of abstractions: a **Main Task**, a **Dispensing Task**, a **Self-Test Task** and a **Communication Task**.
+The Arduino program has been conceived using a **tasks-based architecture** and **synchronous Finite State Machines** with a **fully-static scheduler**. For this purpose have been developed 4 different tasks, with different level of abstractions: a **Main Task**, a **Dispensing Task**, a **Self-Test Task** and a **Communication Task**.
 These tasks communicates each other using a shared variable, called `state` for sake semplicity in the following schemas, which can assume 4 different values: 
 ```c
 enum MachineState { 
@@ -52,7 +53,7 @@ This is the core task of the system. It deals with the buttons and potentiometer
 According to some experiments, in order to not loose events, the period of this task has been set to 100ms: every 100ms the current state of this task is executed.
 
 ### Dispensing Task
-This task takes care of the product dispensing process.
+This task takes care of the product dispensing process. It is executed with a period of 50ms.
 
 ![Dispensing Task](out/state-chart-dispensing-task.svg)
 
@@ -61,7 +62,17 @@ This task every `T_check` makes a self test and, depending on the system state, 
 
 ![Self-Test Task](out/state-chart-self-test-task.svg)
 
+Since this task only takes care of the system self-test, its period is set up 500ms.
+
 ### Communication Task
 This task has only one state, during which:
 - send the machine infos through the Serial line in order to setting up the GUI on the Java Program;
 - check if some message has been posted on the Serial Line by the Java Program (in order to resume the machine status).
+
+Given its nature, this task was also conceived with a fairly long period of 1 second. 
+
+## UML Class Diagram
+Below the UML Class Diagram of the solution. As you can see all the sensors and actuators, as well as the products management, are encapsulated inside a `Machine` abstraction, which exposes an API which make it possible to be controlled; all the tasks shares an instance of the machine.
+
+For what concerns the tasks and their states, here it is used the [State Pattern (GoF)](https://refactoring.guru/design-patterns/state).
+

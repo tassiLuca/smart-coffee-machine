@@ -24,7 +24,7 @@ void setup() {
     scheduler->addTask(t);
     scheduler->addTask(t2);
     scheduler->addTask(t3);
-    scheduler->addTask(t4);
+    //scheduler->addTask(t4);
 }
 
 void loop() {
