@@ -11,10 +11,10 @@ public final class App {
     private App() { }
 
     public static void main(String... args) throws Exception {
-        /* /dev/tty.usbmodem1301 */
-        SerialCommChannel channel = new SerialCommChannel("/dev/tty.usbmodem1301", 9600);
+        /* /dev/tty.usbmodem21301 */
+        SerialCommChannel channel = new SerialCommChannel("/dev/tty.usbmodem21301", 9600);
         System.out.println("Waiting Arduino for rebooting");
-        Thread.sleep(4000);
+        Thread.sleep(10000);
         System.out.println("Ready");
 
         final ManagerView view = new ManagerViewImpl();

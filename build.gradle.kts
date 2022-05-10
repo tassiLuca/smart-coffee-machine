@@ -48,9 +48,6 @@ dependencies {
     // jssc
     implementation("io.github.java-native:jssc:2.9.4")
 
-    // https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path
-    implementation("com.jayway.jsonpath:json-path:2.7.0")
-
     // https://mvnrepository.com/artifact/com.google.guava/guava
     implementation("com.google.guava:guava:31.1-jre")
 

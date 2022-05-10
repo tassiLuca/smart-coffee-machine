@@ -5,6 +5,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import org.slf4j.LoggerFactory;
 import seiot.coffeemanager.utils.AbstractEventPublisher;
 import seiot.coffeemanager.utils.RecoverEvent;
 import seiot.coffeemanager.utils.RefillEvent;
@@ -14,8 +15,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Set;
 
@@ -50,12 +49,12 @@ public class ManagerViewController extends AbstractEventPublisher {
             setLabel(machineStatusLabel, status);
             reader.close();   
         } catch (IOException ex) {
-            System.out.println("Error reading config status file");
+            LoggerFactory.getLogger(this.getClass()).error("Error reading config status file");
         }
     }
 
-    public void setSelfTestsNumLabel(final String labelMsg) {
-        setLabel(selfTestsNumLabel, labelMsg);
+    public void setSelfTestsNumLabel(final int testsNum) {
+        setLabel(selfTestsNumLabel, Integer.toString(testsNum));
     }
 
     public void setChart(final Set<Map.Entry<String, JsonElement>> products) {

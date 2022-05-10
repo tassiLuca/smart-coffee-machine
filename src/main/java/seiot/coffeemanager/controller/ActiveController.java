@@ -1,17 +1,15 @@
 package seiot.coffeemanager.controller;
 
-import net.minidev.json.JSONObject;
-import net.minidev.json.parser.JSONParser;
+import com.jcabi.log.Logger;
+import org.slf4j.LoggerFactory;
 import seiot.coffeemanager.utils.EventSubscriber;
 import seiot.coffeemanager.utils.RecoverEvent;
 import seiot.coffeemanager.utils.RefillEvent;
 import seiot.coffeemanager.utils.SerialCommChannel;
 import seiot.coffeemanager.view.ManagerView;
-import com.jayway.jsonpath.JsonPath;
 import com.google.common.eventbus.Subscribe;
 import com.google.gson.*;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,23 +31,28 @@ public class ActiveController extends Thread implements EventSubscriber {
                 msg = this.channel.receiveMsg();
                 extractInfos(msg);
             } catch (Exception e) {
-                e.printStackTrace();
+                LoggerFactory.getLogger(this.getClass()).error("Malformed json");
             }
         }
     }
 
     public void extractInfos(final String info) {
-        final int status = JsonPath.read(info, "$.status");
-        final int testsNum = JsonPath.read(info, "$.tests");
-        this.view.displayMachineStatus(status);
-        this.view.displaySelfTestsNum(testsNum);
+        final int status = JsonParser.parseString(info)
+                .getAsJsonObject()
+                .get("status")
+                .getAsInt();
+        final int testsNum = JsonParser.parseString(info)
+                .getAsJsonObject()
+                .get("tests")
+                .getAsInt();
         Set<Map.Entry<String, JsonElement>> prods = JsonParser.parseString(info)
                 .getAsJsonObject()
                 .get("products")
                 .getAsJsonObject().entrySet();
+        this.view.displayMachineStatus(status);
+        this.view.displaySelfTestsNum(testsNum);
         this.view.displayItemsNumber(prods);
     }
-
 
     @Subscribe
     public void notifyEvent(final RefillEvent event) {
