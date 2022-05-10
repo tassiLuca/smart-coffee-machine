@@ -15,4 +15,4 @@ The machine has a power-saving modality, so that it goes to sleep if it is idle 
 The Coffee Machine Manager application is used to monitor and check the state of the machine, as well as to refill it when there are no more products that can be made.
 
 ## More infos
-Refers to the [report](./docs/report.html) for a short demo, the breadboard circuit schema and the state charts.
+Refers to the [report](./docs/report.md) for a short demo, the breadboard circuit schema and the state charts.
