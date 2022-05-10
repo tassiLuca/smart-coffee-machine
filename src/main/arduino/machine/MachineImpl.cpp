@@ -6,8 +6,8 @@
 #include "../boundary/HwCoffeeMachineFactory.h"
 
 #define START_DISPENSING_MSG ("Making " + String(selectedProduct->toString()))
-#define STOP_DISPENSING_MSG  ("The " + String(selectedProduct->toString()) + " is ready")
-#define PRODUCT_NA ("=> " + selectedProduct->toString() + " NOT AVAILABLE!")
+#define STOP_DISPENSING_MSG  (selectedProduct->toString() + " is ready!")
+#define PRODUCT_NA (selectedProduct->toString() + " not available")
 #define SELECTED_PRODUCT_MSG \
     ("=> " + selectedProduct->toString() + ", Sugar: " + String(sugarLevel))
 

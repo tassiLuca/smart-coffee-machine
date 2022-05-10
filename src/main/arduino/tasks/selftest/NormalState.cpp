@@ -1,7 +1,7 @@
 #include "NormalState.h"
 #include "SelfTestState.h"
 
-#define CHECK_TIME 180000
+#define CHECK_TIME 60000
 
 NormalState::NormalState() {
     enteredTime = millis();

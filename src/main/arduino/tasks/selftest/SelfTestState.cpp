@@ -2,7 +2,7 @@
 #include "NormalState.h"
 
 #define MIN_TEMP 17.0
-#define MAX_TEMP 24.0
+#define MAX_TEMP 25.0
 
 void SelfTestState::handle() {
     getMachine()->test();

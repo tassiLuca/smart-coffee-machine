@@ -9,7 +9,7 @@
  */
 
 #define PRODUCT_SELECTION_DURATION 5000
-#define IDLE_TIMEOUT 60000
+#define IDLE_TIMEOUT 30000
 
 ReadyState::ReadyState() {
     lastInteraction = millis();
