@@ -15,6 +15,7 @@ void CompletedState::handle() {
     if (checkTransition()) {
         if (getMachine()->productsAvailable()) {
             getMachine()->setMachineState(READY);
+            getMachine()->resetMotorPosition();
         } else {
             getMachine()->setMachineState(ASSISTANCE);
         }

@@ -45,6 +45,7 @@ public:
     void displaySelections() override;
     void displayMessage(String msg) override;
     void make() override;
+    void resetMotorPosition() override;
     bool isMaking() override;
     void test() override;
     bool isTesting() override;

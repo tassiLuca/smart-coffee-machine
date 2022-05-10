@@ -74,6 +74,11 @@ public:
      * @return true if the machine is making the selected product, false otherwise.
      */
     virtual bool isMaking() = 0;   
+
+    /**
+     * @brief Reset the motor position. 
+     */
+    virtual void resetMotorPosition() = 0;
     
     /**
      * @brief Makes a self test. 

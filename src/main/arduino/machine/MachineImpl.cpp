@@ -104,13 +104,6 @@ void MachineImpl::setMachineState(MachineState nextState) {
     currentState = nextState;
 }
 
-bool MachineImpl::isMaking() {
-    // returns true if the button MAKE has just been pressed and the current 
-    // selected product is available (the dispensing process is going to start) 
-    // or the dispensing process is already in progress.
-    return (makeButton->isPressed() && selectedProduct->isAvailable()) || making;
-}
-
 bool MachineImpl::moveServo(const int speed, const String startMessage, const String endMessage) {
     static int angle = 0;
     if (angle == 0) { displayMessage(startMessage); }
@@ -133,8 +126,11 @@ void MachineImpl::make() {
     }
 }
 
-int MachineImpl::getDistance() {
-    return sonarSensor->getDistance();
+bool MachineImpl::isMaking() {
+    // returns true if the button MAKE has just been pressed and the current 
+    // selected product is available (the dispensing process is going to start) 
+    // or the dispensing process is already in progress.
+    return (makeButton->isPressed() && selectedProduct->isAvailable()) || making;
 }
 
 void MachineImpl::test() {
@@ -143,16 +139,24 @@ void MachineImpl::test() {
     if (completed) {
         selfTests++;
         testing = false;
-        servoMotor->setPosition(0);
+        resetMotorPosition();
     }
+}
+
+void MachineImpl::resetMotorPosition() {
+    servoMotor->setPosition(0);
+}
+
+bool MachineImpl::isTesting() {
+    return testing;
 }
 
 float MachineImpl::getTemperature() {
     return temperatureSensor->getTemperature();
 }
 
-bool MachineImpl::isTesting() {
-    return testing;
+int MachineImpl::getDistance() {
+    return sonarSensor->getDistance();
 }
 
 bool MachineImpl::detectingSomeone() {
