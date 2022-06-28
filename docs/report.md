@@ -24,7 +24,7 @@ All the requirements of the system can be found [here](requirements.pdf).
 ## Breadboard schema
 Below, the schematic of the circuit ([here](https://www.tinkercad.com/things/3xcZR1LJb7j) the editable schema on Tinkercad):
 
-![Breadboard circuit schema](out/breadboard-circuit.png)
+![Breadboard circuit schema](./out/breadboard-circuit.png)
 
 ## Design
 The focus of this section is on the design choices made along the development process to meet the requirements. 
@@ -50,19 +50,19 @@ enum MachineState {
 #### Main Task
 This is the core task of the system. It deals with the buttons and potentiometer management, opportuntly triggering the dispensing process of a product. It manages also the sleep state and the assistance state of the system, during which the machine cannot dispense any kind of product.
 
-![Main Task](out/state-chart-main-task.svg)
+![Main Task](./out/state-chart-main-task.svg)
 
 According to some experiments, in order to not loose events, the period of this task has been set to 100ms: every 100ms the current state of this task is executed.
 
 #### Dispensing Task
 This task takes care of the product dispensing process. It is executed with a period of 50ms.
 
-![Dispensing Task](out/state-chart-dispensing-task.svg)
+![Dispensing Task](./out/state-chart-dispensing-task.svg)
 
 #### Self-Test Task
 This task every `T_check` makes a self test and, depending on the system state, set appropriately the state to `ASSISTANCE` or `READY`.
 
-![Self-Test Task](out/state-chart-self-test-task.svg)
+![Self-Test Task](./out/state-chart-self-test-task.svg)
 
 Since `T_check` is a relatively long time, its period is set up 500ms.
 
@@ -78,7 +78,7 @@ Below the UML Class Diagram of the solution. As you can see all the sensors and 
 
 For what concerns the tasks and their states, here it is used the [State Pattern (GoF)](https://refactoring.guru/design-patterns/state).
 
-![Uml Class Diagram](out/class-diagram.svg)
+![Uml Class Diagram](./out/class-diagram.svg)
 
 ### Java Program
 The Java Program consists of 2 main components:
